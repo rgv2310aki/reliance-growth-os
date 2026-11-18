@@ -55,6 +55,8 @@ body{overflow-x:hidden}
 .tabs{display:flex;gap:5px}.tab{border:1px solid var(--line);background:#181a1d;color:#95a2bb;border-radius:6px;padding:6px 9px;font-size:9px;font-weight:750}.tab.active{background:#1c2850;color:#dfe6ff;border-color:#4563ce}.modal{position:fixed;inset:0;background:rgba(0,0,1,.8);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modal-card{width:min(960px,96vw);max-height:90vh;overflow:auto;background:#15161a;border:1px solid #2b3753;border-radius:12px;box-shadow:0 30px 90px rgba(0,0,0,.6);padding:18px}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-title{font-size:15px;font-weight:800}.close{border:1px solid var(--line);background:#181a1d;color:#cad4e5;width:32px;height:32px;border-radius:6px}.modal-content{margin-top:14px}.modal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.modal-box{background:#191b1e;border:1px solid #2d3035;border-radius:7px;padding:10px}.modal-box span{display:block;color:#6f7c94;font-size:8px}.modal-box b{font-size:16px;display:block;margin-top:4px}.modal-copy{font-size:10px;color:#8794ad;line-height:1.6;margin-top:12px}.modal-section{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .footer{margin-top:24px;color:#66738c;font-size:8px;text-align:center;border-top:1px solid var(--line);padding:12px}
 
+/* ---- logos: AJIO and Tira always shown side-by-side with real separation,
+   AJIO on a white tile since its mark reads poorly on the dark background ---- */
 .brand{align-items:center}
 .brand-logos{display:flex;flex-direction:row;align-items:center;gap:16px;flex:none}
 .blogo{height:15px;width:auto;max-width:64px;object-fit:contain;display:block}
@@ -76,6 +78,7 @@ body{overflow-x:hidden}
 .reliance-wordmark{font-weight:900;letter-spacing:.06em;font-size:13px;color:#eef1f7;background:linear-gradient(90deg,#0c2a6b,#123a94);border:1px solid #2451b8;border-radius:6px;padding:4px 10px;display:inline-flex;align-items:center;white-space:nowrap}
 .reliance-wordmark.small{font-size:9px;padding:3px 7px;border-radius:4px;letter-spacing:.05em}
 
+/* ---- v3: orchestrator strip, decision queue, kpi ribbon, agent strip ---- */
 .ot-strip{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;margin-bottom:10px;flex-wrap:wrap}
 .ot-live{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:750;color:#c8d2e6;white-space:nowrap}
 .ot-scan{font-size:10px;color:#71809a;white-space:nowrap}
@@ -152,6 +155,7 @@ body{overflow-x:hidden}
 
 .full-feed{margin-top:4px}
 
+/* ---- campaign-level insights (Spend & ROI cockpit) ---- */
 .camp-card-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .camp-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 .camp-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
@@ -181,11 +185,13 @@ body{overflow-x:hidden}
 .ins-detail{font-size:9.5px;color:#8a97b1;margin-top:4px;line-height:1.5}
 .ins-agent{margin-top:7px;font-size:8px;color:#6f7d98;display:flex;align-items:center;gap:5px}
 
+/* ---- progress rows (Customer & CRM funnel) — value right-aligned ---- */
 .progress-row{margin-bottom:11px}
 .progress-top{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;margin-bottom:5px}
 .progress-top span{color:#8b98b0}
 .progress-top b{font-size:11.5px;color:#eef3ff;font-weight:800}
 
+/* ---- workspace: key data as the main focus, recommendations rail on the RHS ---- */
 .workspace{display:grid;grid-template-columns:1fr 392px;gap:18px;align-items:start}
 .workspace-main{min-width:0}
 .workspace-side{position:sticky;top:88px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 104px);overflow-y:auto;padding:14px;min-width:0;background:linear-gradient(180deg,rgba(93,120,255,.07),rgba(93,120,255,.015) 40%,transparent);border:1px solid #303a63;border-radius:14px;box-shadow:0 0 0 1px rgba(93,120,255,.04) inset,var(--shadow)}
@@ -200,6 +206,12 @@ body{overflow-x:hidden}
 .workspace-main .grid-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .rail-section-title{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#71809a;margin-top:4px}
 
+/* ---- overflow safety net: long AJIO/Tira campaign/category names + biz-tag
+   chips must never break out of a card's border, even inside the narrower
+   workspace-main column. Grid items default to min-width:auto (their content's
+   natural width), which is what was pushing text past panel edges — this
+   resets that, and belts-and-braces every visible card with overflow:hidden
+   so nothing can render past its own border regardless of the cause. ---- */
 .control-grid>*,.grid-3>*,.decision-grid>*,.camp-card-row>*,.detail-grid>*,
 .camp-metrics>*,.decision-metrics>*,.metric-strip>*,.workspace>*,.alloc-row>*{min-width:0}
 .table td.name{white-space:normal;word-break:break-word}
@@ -208,12 +220,14 @@ body{overflow-x:hidden}
 .decision-title,.camp-note,.ins-title,.ins-detail,.money-note,.signal .s,.dq-card .s,
 .alloc-name{overflow-wrap:break-word}
 
+/* ---- top-level spend bucket mix ---- */
 .bucket-row{display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap}
 .bucket-chip{flex:1;min-width:170px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px;display:flex;flex-direction:column;gap:5px}
 .bucket-chip .l{font-size:9px;color:#71809a;text-transform:uppercase;letter-spacing:.07em}
 .bucket-chip .v{font-size:18px;font-weight:820}
 .bucket-chip .m{font-size:9.5px;color:#8a97b1;font-weight:700}
 
+/* ---- notify / trigger-email row inside action modals ---- */
 .notify-row{display:flex;gap:6px;margin-top:8px}
 .notify-row select{flex:1}
 .notify-template{width:100%;margin-top:8px;background:#141519;border:1px solid var(--line);border-radius:8px;color:#c7d0df;font:inherit;font-size:10.5px;line-height:1.6;padding:9px 10px;resize:vertical;box-sizing:border-box}
@@ -226,6 +240,1461 @@ body{overflow-x:hidden}
 </style>
 </head>
 <body>
-<!-- FULL DOCUMENT CONTINUES FROM THE PROVIDED FILE -->
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div><div class="name">Reliance</div><div class="small">Growth OS</div></div>
+    </div>
+    <div class="side-section">
+      <div class="side-label">Executive workflow</div>
+      <nav class="nav" id="mainNav">
+        <button class="nav-btn active" data-page="control" onclick="setPage('control')"><span class="nav-ico">◫</span><span>CMO Command Center</span></button>
+        <button class="nav-btn" data-page="spend" onclick="setPage('spend')"><span class="nav-ico">◌</span><span>Spend & ROI</span><span class="nav-count">8</span></button>
+        <button class="nav-btn" data-page="growth" onclick="setPage('growth')"><span class="nav-ico">↗</span><span>Growth & Acquisition</span></button>
+        <button class="nav-btn" data-page="creative" onclick="setPage('creative')"><span class="nav-ico">✦</span><span>Creative & Content</span></button>
+        <button class="nav-btn" data-page="customer" onclick="setPage('customer')"><span class="nav-ico">◉</span><span>Customer & CRM</span></button>
+        <button class="nav-btn" data-page="marketintel" onclick="setPage('marketintel')"><span class="nav-ico">⟴</span><span>Competitor Intelligence</span><span class="nav-count">4</span></button>
+        <button class="nav-btn" data-page="campaigns" onclick="setPage('campaigns')"><span class="nav-ico">▶</span><span>Campaign Deep-Dive</span></button>
+      </nav>
+    </div>
+    <div class="side-section">
+      <div class="side-label">Agent workspace</div>
+      <nav class="nav">
+        <button class="nav-btn" data-page="actions" onclick="setPage('actions')"><span class="nav-ico">✓</span><span>Action Review</span><span class="nav-count">6</span></button>
+        <button class="nav-btn" data-page="history" onclick="setPage('history')"><span class="nav-ico">◷</span><span>Action History</span></button>
+        <button class="nav-btn" onclick="openAgentPanel()"><span class="nav-ico">⌁</span><span>Agent Console</span></button>
+      </nav>
+    </div>
+    <div class="side-section">
+      <div class="side-label">Knowledge & admin</div>
+      <nav class="nav">
+        <button class="nav-btn" onclick="toast('Knowledge base is connected in this prototype.')"><span class="nav-ico">▤</span><span>Knowledge Base</span></button>
+        <button class="nav-btn" onclick="toast('Data catalog preview opened.')"><span class="nav-ico">◈</span><span>Data Catalog</span></button>
+        <button class="nav-btn" onclick="toast('Settings panel is illustrative.')"><span class="nav-ico">⚙</span><span>Admin & Settings</span></button>
+      </nav>
+    </div>
+    <div class="side-bottom"><div class="connection"><span class="live-dot"></span><span>Marketing data layer connected · live</span></div></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="top-title"><div class="mini-logo">R</div><div><div class="headline">Growth OS</div><div class="subhead">AJIO · Tira · Marketing AI Control Tower</div></div></div>
+      <div class="top-right"><span class="pill green-dot"><span class="p-dot"></span>Agents monitoring · live</span><span class="pill logo-pill"><span class="reliance-wordmark small">RELIANCE</span></span><span class="pill">● Sep 2026</span><span class="user">Signed in: cmo.demo@reliance.com</span><button class="outline" onclick="toast('Demo session only')">Log out</button></div>
+    </header>
+
+    <div class="content">
+      <div class="toolbar">
+        <div class="crumb"><span class="spark">✦</span><span id="pageCrumb">CMO Command Center</span><span style="color:#5e6c86">/</span><span id="filterCrumb">Portfolio view</span></div>
+        <div class="toolbar-right">
+          <select class="filter" id="businessFilter" onchange="syncFilters()"><option>All businesses</option><option>AJIO</option><option>Tira</option><option>Jiomart</option><option>Reliance Trends</option></select>
+          <select class="filter" id="periodFilter" onchange="toast('Time window updated to '+this.value)"><option>Last 30 days</option><option>Last 90 days</option><option>YTD</option><option>Same month LY</option></select>
+          <select class="filter" id="compareFilter"><option>vs. Budget</option><option>vs. MoM</option><option>vs. YoY</option><option>vs. Same month LY</option></select>
+          <button class="btn" onclick="resetView()">Reset</button>
+        </div>
+      </div>
+
+      <section id="controlPage">
+        <div class="ot-strip">
+          <div class="ot-live"><span class="live-dot"></span>10 agents monitoring spend, sentiment, returns and competitive signals across AJIO, Tira, Jiomart and Reliance Trends</div>
+          <div class="ot-scan">Last full scan: 4 minutes ago</div>
+          <div class="ask-bar">
+            <input id="heroAskInput" placeholder="Ask the Control Tower — e.g. Where should I cut ₹3 Cr without hurting revenue?" onkeydown="if(event.key==='Enter')runHeroAsk()">
+            <button class="btn primary" onclick="runHeroAsk()">Ask</button>
+          </div>
+        </div>
+
+        <div class="kpi-ribbon" id="heroMetrics"></div>
+
+        <div class="workspace">
+          <div class="workspace-main" id="mainColumn">
+
+            <div class="section-head"><div><div class="section-name">Spend bucket mix</div><div class="section-sub">Media vs. agency/vendors vs. tools — share of total spend; revenue and ROI shown where directly attributable</div></div></div>
+            <div id="spendBucketSection"></div>
+
+            <div class="section-head"><div><div class="section-name">Summary of marketing performance</div><div class="section-sub">Every channel and agency/vendor in one ledger, spend next to the revenue it produced — nothing hidden behind a click. Tools & martech spend is tracked separately in the spend bucket mix above; revenue impact isn't directly attributable.</div></div></div>
+            <div class="spend-card">
+              <div class="spend-summary">
+                <div class="spend-total"><div class="l" id="moneyTotalLabel">Total marketing outlay · YTD</div><div class="v" id="moneyTotalSpend">₹126.4 Cr</div><div class="m good" id="moneyTotalSub">+8.2% YoY · ₹2,840 Cr revenue</div></div>
+                <div class="allocation" id="allocationRows"></div>
+                <div style="width:130px;height:130px;flex:none;overflow:hidden"><canvas id="spendDonut" width="130" height="130" style="width:130px;height:130px;display:block"></canvas></div>
+              </div>
+              <div class="mm-table-wrap">
+                <div class="mm-tabs" id="mmTabs"></div>
+                <div class="mm-chart-legend"><span><span class="dot-sw good"></span>Strong ROI (≥22x)</span><span><span class="dot-sw warn"></span>Watch (15–22x)</span><span><span class="dot-sw bad"></span>Needs attention (&lt;15x)</span><span class="mm-chart-hint">Hover a bar for spend, revenue, ROI and revenue MoM Δ</span></div>
+                <div id="moneyChartWrap" style="position:relative;overflow:hidden"><canvas id="moneyChart"></canvas></div>
+              </div>
+              <div class="money-note"><span><strong>Executive read:</strong> <span id="moneyExecRead">Performance + Brand pools carry 68% of spend and the largest direct-revenue contribution; two agency partners and Paid Social are the efficiency pressure points worth a decision this week.</span></span><button class="btn" onclick="setPage('spend')">Open spend cockpit →</button></div>
+            </div>
+
+            <div class="section-head"><div><div class="section-name">Biggest campaigns — last 60 days</div><div class="section-sub">Top 9 by combined reach and business impact across the portfolio — click any card for the full read</div></div></div>
+            <div class="top-camp-row" id="campaignsTop5Row"></div>
+
+            <div class="section-head"><div><div class="section-name">Business pulse</div><div class="section-sub">The CMO can move from portfolio economics to the business or category creating the movement</div></div></div>
+            <div class="grid-3">
+          <div class="panel" id="ajioPulsePanel"><div class="panel-head"><div><div class="panel-title">AJIO</div><div class="panel-sub">Fashion marketplace</div></div><span class="badge green">Healthy</span></div><div class="metric-strip" style="grid-template-columns:repeat(2,1fr)"><div class="metric-box"><div class="l">Spend</div><div class="v">₹78.0 Cr</div><div class="m good">+7.1% YoY</div></div><div class="metric-box"><div class="l">Revenue</div><div class="v">₹1,920 Cr</div><div class="m good">+16.8%</div></div><div class="metric-box"><div class="l">ROI</div><div class="v">24.6x</div><div class="m good">+6.4%</div></div><div class="metric-box"><div class="l">CAC</div><div class="v">₹681</div><div class="m good">-8.1%</div></div></div><div class="section-sub" style="margin-top:12px">Top signal: AJIO OWN and Biba are driving Women's Fashion; performance spend is scaling faster than category revenue while Search keeps pace against Myntra.</div></div>
+          <div class="panel" id="tiraPulsePanel"><div class="panel-head"><div><div class="panel-title">Tira</div><div class="panel-sub">Beauty platform</div></div><span class="badge yellow">Watch</span></div><div class="metric-strip" style="grid-template-columns:repeat(2,1fr)"><div class="metric-box"><div class="l">Spend</div><div class="v">₹48.4 Cr</div><div class="m warn">+10.0% YoY</div></div><div class="metric-box"><div class="l">Revenue</div><div class="v">₹920 Cr</div><div class="m good">+10.1%</div></div><div class="metric-box"><div class="l">ROI</div><div class="v">19.0x</div><div class="m bad">-3.7%</div></div><div class="metric-box"><div class="l">CAC</div><div class="v">₹846</div><div class="m bad">+9.4%</div></div></div><div class="section-sub" style="margin-top:12px">Top signal: Fenty Beauty and Estée Lauder lead Paid Social / creator spend, which is growing faster than the revenue it returns — Nykaa remains the share benchmark.</div></div>
+          <div class="panel" id="jiomartPulsePanel"><div class="panel-head"><div><div class="panel-title">Jiomart</div><div class="panel-sub">Grocery &amp; quick-commerce</div></div><span class="badge green">Healthy</span></div><div class="metric-strip" style="grid-template-columns:repeat(2,1fr)"><div class="metric-box"><div class="l">Spend</div><div class="v">₹52.0 Cr</div><div class="m good">+18.4% YoY</div></div><div class="metric-box"><div class="l">Revenue</div><div class="v">₹1,340 Cr</div><div class="m good">+22.6%</div></div><div class="metric-box"><div class="l">ROI</div><div class="v">25.8x</div><div class="m good">+3.4%</div></div><div class="metric-box"><div class="l">CAC</div><div class="v">₹512</div><div class="m good">-5.2%</div></div></div><div class="section-sub" style="margin-top:12px">Top signal: SEO/GEO and Database/CRM are compounding fastest for Jiomart; Influencer/Affiliate lags the portfolio ROI median — BigBasket remains the delivery-speed benchmark.</div></div>
+          <div class="panel" id="trendsPulsePanel"><div class="panel-head"><div><div class="panel-title">Reliance Trends</div><div class="panel-sub">Value fashion retail</div></div><span class="badge green">Healthy</span></div><div class="metric-strip" style="grid-template-columns:repeat(2,1fr)"><div class="metric-box"><div class="l">Spend</div><div class="v">₹34.5 Cr</div><div class="m good">+6.4% YoY</div></div><div class="metric-box"><div class="l">Revenue</div><div class="v">₹780 Cr</div><div class="m good">+9.8%</div></div><div class="metric-box"><div class="l">ROI</div><div class="v">22.6x</div><div class="m good">+2.1%</div></div><div class="metric-box"><div class="l">CAC</div><div class="v">₹398</div><div class="m good">-3.8%</div></div></div><div class="section-sub" style="margin-top:12px">Top signal: Performance Marketing and SEO/GEO lead paid execution for Reliance Trends; Influencer/Affiliate is below the portfolio ROI median — Zudio remains the share benchmark.</div></div>
+          <div class="panel"><div class="panel-head"><div><div class="panel-title">Market & customer signal</div><div class="panel-sub">Cross-business view · click any row for the background</div></div><span class="badge">3 watchpoints</span></div><div class="signal-list"><div class="signal signal-click" onclick="openMarketSignal(301)"><span class="dot green"></span><div><div class="t">Market share up 1.3 pp</div><div class="s">Driven by Women's Fashion (+2.1pp vs. Myntra); Tira flat vs. Nykaa, Purplle</div></div><div class="right good">18.7%</div></div><div class="signal signal-click" onclick="openMarketSignal(302)"><span class="dot yellow"></span><div><div class="t">CAC divergence</div><div class="s">Traced to Haircare & Personal Care + Influencer/Affiliate</div></div><div class="right warn">₹846</div></div><div class="signal signal-click" onclick="openMarketSignal(303)"><span class="dot"></span><div><div class="t">CRM under-indexed</div><div class="s">Top-quintile repeat cohort gets only ~14% of send volume</div></div><div class="right">+₹5.2 Cr</div></div></div></div>
+        </div>
+
+            <div class="section-head"><div><div class="section-name">Category-wise insights</div><div class="section-sub">Inside every business's categories — fashion (AJIO), beauty (Tira), grocery (Jiomart) and value fashion (Reliance Trends) — where spend and revenue actually sit</div></div></div>
+            <div class="detail-grid" id="categorySection"></div>
+
+        <div id="fullFeedSection" style="display:none">
+          <div class="section-head"><div><div class="section-name">Full Control Tower feed</div><div class="section-sub">Every warning, opportunity and ready action, grouped and attributed to the agent that raised it</div></div></div>
+          <div class="control-grid full-feed">
+            <div class="signal-panel">
+              <div class="panel-head"><div><div class="panel-title">Warnings & exceptions</div><div class="panel-sub">What needs attention now</div></div><span class="badge yellow" id="warnCount">5 items</span></div>
+              <div class="signal-list" id="warningSignals"></div>
+            </div>
+            <div class="signal-panel">
+              <div class="panel-head"><div><div class="panel-title">Opportunities</div><div class="panel-sub">Where the engine sees upside</div></div><span class="badge green" id="oppCount">3 items</span></div>
+              <div class="signal-list" id="oppSignals"></div>
+            </div>
+            <div class="signal-panel">
+              <div class="panel-head"><div><div class="panel-title">Actions ready for CMO</div><div class="panel-sub">Move from insight to decision</div></div><span class="badge" id="actionCount">3 pending</span></div>
+              <div class="signal-list" id="actionSignals"></div>
+              <div class="signal-action"><span>Guardrail policy</span><b>CMO approval before >₹1 Cr reallocation</b></div>
+            </div>
+          </div>
+        </div>
+
+            <div class="section-head"><div><div class="section-name">Performance trajectory</div><div class="section-sub">Portfolio spend vs revenue efficiency over the last six months</div></div></div>
+            <div class="grid-3">
+              <div class="panel" style="grid-column:span 2"><div class="panel-head"><div><div class="panel-title">Spend vs revenue</div><div class="panel-sub" id="perfSub">Monthly run-rate</div></div><span class="badge">Apr–Sep 2026</span></div><div class="chart-h"><canvas id="performanceChart"></canvas></div></div>
+              <div class="panel"><div class="panel-head"><div><div class="panel-title">ROI trend</div><div class="panel-sub">Revenue multiple</div></div></div><div class="chart-h"><canvas id="roasChart"></canvas></div></div>
+            </div>
+
+          </div>
+
+          <div class="workspace-side" id="sideRail">
+            <div class="agent-strip" id="subagentStrip"></div>
+
+            <div class="dq-head">
+              <div><div class="dq-title" id="dqTitle">Decisions need you right now</div><div class="dq-sub" id="dqSub">Ranked by financial impact and urgency</div></div>
+            </div>
+            <div class="dq-list" id="priorityList"></div>
+            <button class="section-link" onclick="toggleFullFeed()"><span id="fullFeedToggleLabel">Show full feed (11) ↓</span></button>
+
+            <div class="rail-section-title">CMO decisions</div>
+            <div class="decision-grid" id="decisionGrid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="spendPage" style="display:none"></section>
+      <section id="growthPage" style="display:none"></section>
+      <section id="creativePage" style="display:none"></section>
+      <section id="customerPage" style="display:none"></section>
+      <section id="marketIntelPage" style="display:none"></section>
+      <section id="campaignsPage" style="display:none"></section>
+      <section id="actionsPage" style="display:none"></section>
+      <section id="historyPage" style="display:none"></section>
+
+      <div class="footer">Illustrative prototype · All values shown are dummy data for demonstration only and do not represent actual Reliance, AJIO or Tira performance. Third-party brand, agency and competitor names are real and used for contextual realism only.</div>
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="modal"><div class="modal-card"><div class="modal-head"><div class="modal-title" id="modalTitle"></div><button class="close" onclick="closeModal()">×</button></div><div class="modal-content" id="modalBody"></div></div></div>
+<div id="toast" style="position:fixed;right:20px;bottom:20px;background:#16213a;color:#e8eefb;border:1px solid #2a3854;border-radius:8px;padding:10px 12px;font-size:10px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s;z-index:80"></div>
+
+<script>
+/* ============================================================
+   DATA LAYER
+   BU_TOTALS holds the one authoritative spend/revenue/ROI/CAC/share
+   figure set per business (these are the same numbers already shown
+   in the Business Pulse panels, so nothing here contradicts the copy).
+   buildByBusiness() reallocates the portfolio-level channel & vendor
+   rows into AJIO-only / Tira-only breakdowns, RESCALED so each set
+   sums exactly back to that business's authoritative totals — so
+   every table, chart and KPI on the page can read from one place and
+   always agree with each other and with the Business Pulse copy.
+   ============================================================ */
+const BU_TOTALS={
+  'All businesses':{spend:212.9,rev:4960,roas:23.3,cac:560,share:17.5,dSpend:'+10.6% YoY',dRev:'+16.0% YoY',dRoas:'+3.0% YoY',dCac:'-3.7% YoY',dShare:'+1.5 pp',newCust:'7.3M',newCustN:7.3,dNewCust:'+16.5% YoY',repeatCust:40.0,dRepeatCust:'+2.4 pp',footfallGrowth:'+9.4%',footfallGrowthN:9.4,installsGrowth:'+13.9%',installsGrowthN:13.9,acqGrowth:'+11.7%',acqGrowthN:11.7,totalBizRev:13922,revContribPct:35.6,dRevContribPct:'+1.9 pp',tone:{spend:'good',rev:'good',roas:'good',cac:'good',share:'good'}},
+  'AJIO':{spend:78.0,rev:1920,roas:24.6,cac:681,share:24.1,dSpend:'+7.1% YoY',dRev:'+16.8% YoY',dRoas:'+6.4% YoY',dCac:'-8.1% YoY',dShare:'+1.6 pp',newCust:'1.5M',newCustN:1.5,dNewCust:'+13.5% YoY',repeatCust:34.5,dRepeatCust:'+1.8 pp',footfallGrowth:'+10.1%',footfallGrowthN:10.1,installsGrowth:'+18.2%',installsGrowthN:18.2,acqGrowth:'+12.4%',acqGrowthN:12.4,totalBizRev:4660,revContribPct:41.2,dRevContribPct:'+2.1 pp',tone:{spend:'good',rev:'good',roas:'good',cac:'good',share:'good'}},
+  'Tira':{spend:48.4,rev:920,roas:19.0,cac:846,share:9.8,dSpend:'+10.0% YoY',dRev:'+10.1% YoY',dRoas:'-3.7% YoY',dCac:'+9.4% YoY',dShare:'+0.4 pp',newCust:'0.9M',newCustN:0.9,dNewCust:'+10.4% YoY',repeatCust:46.0,dRepeatCust:'+2.8 pp',footfallGrowth:'+8.0%',footfallGrowthN:8.0,installsGrowth:'+14.6%',installsGrowthN:14.6,acqGrowth:'+9.2%',acqGrowthN:9.2,totalBizRev:3433,revContribPct:26.8,dRevContribPct:'+0.9 pp',tone:{spend:'warn',rev:'good',roas:'bad',cac:'bad',share:'good'}},
+  'Jiomart':{spend:52.0,rev:1340,roas:25.8,cac:512,share:16.4,dSpend:'+18.4% YoY',dRev:'+22.6% YoY',dRoas:'+3.4% YoY',dCac:'-5.2% YoY',dShare:'+2.4 pp',newCust:'3.1M',newCustN:3.1,dNewCust:'+24.1% YoY',repeatCust:41.2,dRepeatCust:'+3.6 pp',footfallGrowth:'+11.0%',footfallGrowthN:11.0,installsGrowth:'+19.5%',installsGrowthN:19.5,acqGrowth:'+16.8%',acqGrowthN:16.8,totalBizRev:3480,revContribPct:38.5,dRevContribPct:'+2.9 pp',tone:{spend:'good',rev:'good',roas:'good',cac:'good',share:'good'}},
+  'Reliance Trends':{spend:34.5,rev:780,roas:22.6,cac:398,share:12.1,dSpend:'+6.4% YoY',dRev:'+9.8% YoY',dRoas:'+2.1% YoY',dCac:'-3.8% YoY',dShare:'+0.7 pp',newCust:'1.8M',newCustN:1.8,dNewCust:'+8.9% YoY',repeatCust:44.5,dRepeatCust:'+1.4 pp',footfallGrowth:'+5.6%',footfallGrowthN:5.6,installsGrowth:'+9.2%',installsGrowthN:9.2,acqGrowth:'+7.4%',acqGrowthN:7.4,totalBizRev:2349,revContribPct:33.2,dRevContribPct:'+1.1 pp',tone:{spend:'good',rev:'good',roas:'good',cac:'good',share:'good'}}
+};
+const BASE_MONTHLY={labels:['Apr','May','Jun','Jul','Aug','Sep'],spend:[18.2,19.5,20.1,21.8,22.9,23.9],revenue:[398,424,441,467,501,609]};
+const CHANNEL_AJIO_WEIGHT={'Performance Marketing':.62,'Brand Marketing':.58,'SEO / GEO':.68,'Creative & Content':.55,'Database / CRM':.60,'Influencer / Affiliate':.40};
+const VENDOR_AJIO_WEIGHT={'Interactive Avenues':.64,'GroupM':.58,'Ogilvy':.42,'Qyuki Digital Media':.50,'CleverTap':.46,'SEMrush':.66,'Kantar':.55};
+
+/* ---------------------------------------------------------------
+   Campaign-level drill-down (Spend & ROI cockpit)
+   Google Ads + Meta Ads are the two real platforms carrying the bulk
+   of the "Performance Marketing" channel (₹38.4 Cr portfolio-wide).
+   Every campaign is tagged to the AJIO or Tira business it actually
+   belongs to (both businesses run on both platforms) so the business
+   filter dims the other business's campaigns/insights instead of
+   silently ignoring them — the same convention used everywhere else
+   on this page. Ad-group spend always sums exactly to its parent
+   campaign. Combined the two platforms total ₹27.5 Cr, an illustrative
+   SUBSET of the ₹38.4 Cr channel — the remainder sits in affiliate,
+   programmatic and marketplace ads not broken out in this prototype.
+   --------------------------------------------------------------- */
+const CAMPAIGN_PLATFORMS=[
+  {key:'google',name:'Google Ads',badgeClass:'',impr:'14.1M',ctr:2.6,cpa:45,roas:4.3,delta:-3.8,
+    campaigns:[
+      {name:'AJIO PMax — Fashion Catalog',biz:'AJIO',spend:540,cpa:34,roas:5.1,delta:2.4,status:'ACTIVE'},
+      {name:'AJIO Search — Brand (AJIO OWN)',biz:'AJIO',spend:210,cpa:14,roas:8.6,delta:0.8,status:'ACTIVE'},
+      {name:'Tira Search — Non-brand (Skincare & Makeup)',biz:'Tira',spend:460,cpa:58,roas:2.6,delta:-11.5,status:'ACTIVE',adGroups:[
+        {name:'Skincare — non-brand',spend:230,cpa:64,roas:2.1,delta:-18.6},
+        {name:'Makeup — non-brand',spend:150,cpa:52,roas:3.0,delta:-3.8},
+        {name:'Fragrance — non-brand',spend:80,cpa:46,roas:3.6,delta:4.1}
+      ]},
+      {name:'AJIO YouTube — Prospecting (Festive Shoppers)',biz:'AJIO',spend:300,cpa:66,roas:2.4,delta:-6.5,status:'LIMITED',adGroups:[
+        {name:'Fashion-forward 18–34',spend:165,cpa:74,roas:2.0,delta:-12.1},
+        {name:'Value shoppers lookalike',spend:90,cpa:58,roas:2.8,delta:3.2},
+        {name:'Festive intent shoppers',spend:45,cpa:55,roas:3.1,delta:6.4}
+      ]}
+    ]
+  },
+  {key:'meta',name:'Meta Ads',badgeClass:'green',impr:'16.4M',ctr:2.05,cpa:38,roas:4.1,delta:2.7,
+    campaigns:[
+      {name:'Tira Retargeting — DPA (Fenty Beauty & Estée Lauder)',biz:'Tira',spend:340,cpa:24,roas:5.8,delta:6.2,status:'ACTIVE'},
+      {name:'Tira Prospecting — Broad (Skincare Newcomers)',biz:'Tira',spend:260,cpa:62,roas:2.1,delta:-12.8,status:'ACTIVE'},
+      {name:'AJIO Prospecting — Lookalike 1% (AJIO Loyalty)',biz:'AJIO',spend:275,cpa:41,roas:3.4,delta:3.6,status:'ACTIVE'},
+      {name:'AJIO Advantage+ Shopping (Footwear & Accessories)',biz:'AJIO',spend:365,cpa:33,roas:4.6,delta:9.8,status:'ACTIVE'}
+    ]
+  }
+];
+const CAMPAIGN_INSIGHTS=[
+  {id:100,sev:'info',agent:'Anomaly Detector',time:'3h ago',platform:'google',campaign:'AJIO PMax — Fashion Catalog',biz:'AJIO',
+    title:c=>`${c.name} is your best performing campaign this week`,
+    detail:c=>`ROI is ${c.roas}x with Δ7D at +${c.delta}% — AJIO OWN and Biba SKUs are leading this feed. Put more budget here while it's compounding.`,
+    rationale:c=>`Anomaly Detector ranks every campaign on its 7-day ROI trend vs. the account median. ${c.name} has led the Google Ads account for 6 straight days.`,
+    steps:['Raise the daily budget in 10–15% increments, not one large jump','Confirm inventory / stock cover on the leading SKUs can support the extra volume','Re-check ROI after 5 days before increasing again']},
+  {id:101,sev:'warning',agent:'Anomaly Detector',time:'2h ago',platform:'google',campaign:'Tira Search — Non-brand (Skincare & Makeup)',biz:'Tira',
+    title:c=>`Sales are slipping on ${c.name}`,
+    detail:c=>`Δ7D is ${c.delta}% over the last 10 days, concentrated in the Skincare — non-brand ad group (-18.6%) — likely Nykaa or Purplle bidding up the same non-brand terms.`,
+    rationale:c=>`Anomaly Detector triggers a warning when a campaign's rolling sales trend crosses -8% for 5+ consecutive days. ${c.name} crossed that threshold 10 days ago and hasn't recovered.`,
+    steps:['Pull the search-term report for the Skincare — non-brand ad group','Check auction insights for new competitor overlap (Nykaa, Purplle)','Pause or lower bids on the keywords with rising CPA before reallocating spend']},
+  {id:102,sev:'critical',agent:'Anomaly Detector',time:'1h ago',platform:'google',campaign:'AJIO Search — Brand (AJIO OWN)',biz:'AJIO',
+    title:c=>`${c.name} is on pace to overspend its monthly budget`,
+    detail:c=>`At the current daily rate this campaign will land roughly 28% over its monthly budget — lower the daily cap, or shift the surplus to AJIO PMax — Fashion Catalog where CPA is lower.`,
+    rationale:c=>`Anomaly Detector projects month-end spend from the trailing 7-day daily average. ${c.name}'s projection has been above 125% of budget for 4 consecutive days.`,
+    steps:['Lower the daily budget cap on AJIO Search — Brand','Move the freed budget toward AJIO PMax — Fashion Catalog','Re-forecast at the next weekly review']},
+  {id:103,sev:'warning',agent:'Anomaly Detector',time:'2h ago',platform:'google',campaign:'AJIO YouTube — Prospecting (Festive Shoppers)',biz:'AJIO',
+    title:c=>`${c.name} has only used part of its monthly budget`,
+    detail:c=>`Spend is pacing well below plan (status: ${c.status}) with the festive sale window approaching — raise the daily budget by roughly 20% so the allocated spend is actually deployed before the peak.`,
+    rationale:c=>`Anomaly Detector compares day-of-month spend against the linear pacing target. ${c.name} is more than 15 percentage points behind pace with under two weeks left before the festive push.`,
+    steps:['Raise the daily budget cap by ~20% ahead of the festive window','Widen the Value shoppers lookalike audience slightly if delivery is still constrained','Re-forecast pacing weekly through the sale period']},
+  {id:104,sev:'critical',agent:'Anomaly Detector',time:'1h ago',platform:'meta',campaign:'Tira Prospecting — Broad (Skincare Newcomers)',biz:'Tira',
+    title:c=>`Cost per sale has jumped sharply on ${c.name}`,
+    detail:c=>`Δ7D is ${c.delta}% — a beauty competitor (likely Nykaa or Purplle) appears to be bidding up this audience. Set a bid cap or pause until CPA recovers.`,
+    rationale:c=>`Anomaly Detector flags a CPA spike when it moves more than 40% above its 30-day average without a matching ROI improvement. ${c.name} has held that pattern for 6 days.`,
+    steps:["Set a manual bid cap in line with the pre-spike CPA","Test a narrower audience overlap to rule out auction pressure","Pause the campaign if CPA hasn't recovered within 3 days"]},
+  {id:105,sev:'info',agent:'Anomaly Detector',time:'4h ago',platform:'meta',campaign:'Tira Retargeting — DPA (Fenty Beauty & Estée Lauder)',biz:'Tira',
+    title:c=>`Click-through rate is climbing on ${c.name}`,
+    detail:c=>`Δ7D is +${c.delta}% — once Tira Prospecting — Broad's CPA recovers, test this same creative concept there to capture similar lift.`,
+    rationale:c=>`Anomaly Detector surfaces creative wins when CTR outperforms the ad set's 30-day average by more than 15% for a full week. ${c.name} has held that lift for 7 days.`,
+    steps:['Log the winning Fenty Beauty / Estée Lauder creative concept for reuse','Wait for Tira Prospecting — Broad CPA to stabilize before testing it there','Monitor CTR and CPA for 5 days before scaling further']}
+];
+let expandedCampaigns=new Set(['google|Tira Search — Non-brand (Skincare & Makeup)','google|AJIO YouTube — Prospecting (Festive Shoppers)']);
+function lakh(n){ return money(n/100); }
+function findCampaign(platformKey,name){
+  const p=CAMPAIGN_PLATFORMS.find(x=>x.key===platformKey);
+  if(!p) return null;
+  let c=p.campaigns.find(x=>x.name===name);
+  if(c) return c;
+  for(const cc of p.campaigns){ if(cc.adGroups){ const a=cc.adGroups.find(x=>x.name===name); if(a) return a; } }
+  return null;
+}
+
+/* ---------------------------------------------------------------
+   Category-wise insights (CMO Command Center)
+   AJIO's fashion categories and Tira's beauty categories. Spend and
+   revenue for each business's categories sum EXACTLY to that
+   business's BU_TOTALS spend/revenue, so this view never contradicts
+   the KPI ribbon or Business Pulse above it.
+   --------------------------------------------------------------- */
+const CATEGORY_DATA=[
+  {name:"Women's Fashion",biz:'AJIO',spend:34,rev:890,delta:9.1},
+  {name:"Men's Fashion",biz:'AJIO',spend:21,rev:520,delta:4.4},
+  {name:'Footwear',biz:'AJIO',spend:14,rev:340,delta:-2.1},
+  {name:'Accessories & Kidswear',biz:'AJIO',spend:9,rev:170,delta:-6.5},
+  {name:'Skincare',biz:'Tira',spend:19,rev:380,delta:6.3},
+  {name:'Makeup',biz:'Tira',spend:16,rev:310,delta:-8},
+  {name:'Fragrance',biz:'Tira',spend:7,rev:150,delta:9.8},
+  {name:'Haircare & Personal Care',biz:'Tira',spend:6.4,rev:80,delta:-11.2},
+  {name:'Grocery & Staples',biz:'Jiomart',spend:32,rev:850,delta:18.2},
+  {name:'Personal & Home Care',biz:'Jiomart',spend:20,rev:490,delta:12.6},
+  {name:'Value Fashion',biz:'Reliance Trends',spend:22,rev:520,delta:7.8},
+  {name:'Footwear & Accessories',biz:'Reliance Trends',spend:12.5,rev:260,delta:4.2}
+].map(c=>({...c, roi: Math.round((c.rev/c.spend)*10)/10}));
+const CATEGORY_SENTIMENT=[
+  {category:"Women's Fashion",biz:'AJIO',score:4.3,reviews:8200,positive:81,trend:2,theme:'Fit and fabric quality praised broadly; sizing callouts remain the top constructive theme.'},
+  {category:"Men's Fashion",biz:'AJIO',score:4.2,reviews:5400,positive:79,trend:1,theme:'Consistent quality perception; fit feedback trending positive after the size-chart update.'},
+  {category:'Footwear',biz:'AJIO',score:3.9,reviews:3100,positive:70,trend:-3,theme:'Comfort well-rated; durability complaints ticking up on sport styles specifically.'},
+  {category:'Accessories & Kidswear',biz:'AJIO',score:3.6,reviews:1450,positive:61,trend:-7,theme:'Colour-fastness and stitching complaints rising — the smallest category is also the least efficient and lowest-rated.'},
+  {category:'Skincare',biz:'Tira',score:4.6,reviews:6100,positive:90,trend:4,theme:'Hydration and texture praised consistently — the strongest repeat-purchase signal in the portfolio.'},
+  {category:'Makeup',biz:'Tira',score:4.4,reviews:4700,positive:85,trend:2,theme:'Shade range and packaging praised; occasional stock-out complaints during peak demand.'},
+  {category:'Fragrance',biz:'Tira',score:4.5,reviews:1900,positive:88,trend:6,theme:"Fastest-improving sentiment in the portfolio — pairs with Fragrance's ROI momentum."},
+  {category:'Haircare & Personal Care',biz:'Tira',score:3.7,reviews:980,positive:64,trend:-9,theme:'Efficacy complaints on 2 hero SKUs are dragging the category down — worth a reformulation review.'},
+  {category:'Grocery & Staples',biz:'Jiomart',score:4.1,reviews:2400,positive:76,trend:3,theme:'Freshness and on-time delivery praised; occasional substitution complaints during high-demand slots.'},
+  {category:'Personal & Home Care',biz:'Jiomart',score:4.3,reviews:1600,positive:82,trend:5,theme:'Wide assortment and consistent stock praised — fastest-improving sentiment in the Jiomart portfolio.'},
+  {category:'Value Fashion',biz:'Reliance Trends',score:3.9,reviews:3100,positive:71,trend:2,theme:'Price-to-quality perception strong; sizing consistency across stores is the top constructive theme.'},
+  {category:'Footwear & Accessories',biz:'Reliance Trends',score:3.8,reviews:1200,positive:68,trend:-1,theme:'Comfort well-rated; durability complaints ticking up on value-tier footwear specifically.'}
+];
+const CATEGORY_RETURNS=[
+  {category:"Women's Fashion",biz:'AJIO',rate:10,reason:'Size/fit mismatch vs. size chart',trend:0.8},
+  {category:"Men's Fashion",biz:'AJIO',rate:8,reason:'Fit inconsistency across sizes',trend:0.3},
+  {category:'Footwear',biz:'AJIO',rate:12,reason:'Comfort/fit mismatch on first wear',trend:1.5},
+  {category:'Accessories & Kidswear',biz:'AJIO',rate:15,reason:'Quality perception vs. price point',trend:2.4},
+  {category:'Skincare',biz:'Tira',rate:4,reason:'Damaged in transit (packaging)',trend:-0.5},
+  {category:'Makeup',biz:'Tira',rate:6,reason:'Shade mismatch vs. online swatch',trend:0.2},
+  {category:'Fragrance',biz:'Tira',rate:3,reason:'Leakage/packaging in transit',trend:-0.8},
+  {category:'Haircare & Personal Care',biz:'Tira',rate:13,reason:'Product efficacy not as expected',trend:3.1},
+  {category:'Grocery & Staples',biz:'Jiomart',rate:3,reason:'Item damaged/spoiled on arrival',trend:-0.4},
+  {category:'Personal & Home Care',biz:'Jiomart',rate:4,reason:'Wrong variant/shade delivered',trend:0.1},
+  {category:'Value Fashion',biz:'Reliance Trends',rate:9,reason:'Size/fit mismatch',trend:0.5},
+  {category:'Footwear & Accessories',biz:'Reliance Trends',rate:7,reason:'Comfort/fit mismatch',trend:-0.3}
+];
+const CATEGORY_INSIGHTS=[
+  {id:200,sev:'warning',agent:'Category Analyst',time:'5h ago',category:'Accessories & Kidswear',biz:'AJIO',
+    title:c=>`${c.name} ROI is trailing the rest of AJIO`,
+    detail:c=>`ROI is ${c.roi}x against AJIO's blended 24.6x, down ${Math.abs(c.delta)}% — the smallest category is also the least efficient.`,
+    rationale:c=>`Category Analyst benchmarks every category's ROI against its business's blended average. ${c.name} has missed that bar for 3 consecutive months.`,
+    steps:["Audit SKU-level margin and promo depth in this category","Test a smaller, more targeted audience before cutting spend outright","Revisit in 4 weeks against the AJIO blended benchmark"]},
+  {id:201,sev:'info',agent:'Category Analyst',time:'6h ago',category:"Women's Fashion",biz:'AJIO',
+    title:c=>`${c.name} remains AJIO's largest and healthiest category`,
+    detail:c=>`${money(c.spend)} spend is driving ${money(c.rev)} revenue at ${c.roi}x ROI, up ${c.delta}% — compounding without losing efficiency.`,
+    rationale:c=>`Category Analyst flags categories that are both scaling and holding or improving ROI. ${c.name} has done both for 3 straight quarters.`,
+    steps:["Protect this category's budget from any portfolio-wide reallocation","Brief Creative Agent on which SKUs are driving the lift","Consider extending the same creative approach to Men's Fashion"]},
+  {id:202,sev:'critical',agent:'Category Analyst',time:'2h ago',category:'Haircare & Personal Care',biz:'Tira',
+    title:c=>`${c.name} ROI has fallen to ${c.roi}x`,
+    detail:c=>`Down ${Math.abs(c.delta)}% and now the weakest category across both businesses — investigate before scaling further.`,
+    rationale:c=>`Category Analyst escalates to critical when a category's ROI drops more than 10% in a rolling quarter with no recovery. ${c.name} has now missed two consecutive checks.`,
+    steps:["Pause prospecting spend in this category pending a margin review","Check for SKU-level stockouts or price changes driving the CAC shift","Reassess after the next pricing/promo cycle"]},
+  {id:203,sev:'info',agent:'Category Analyst',time:'4h ago',category:'Fragrance',biz:'Tira',
+    title:c=>`${c.name} is Tira's most efficient category`,
+    detail:c=>`ROI ${c.roi}x and climbing ${c.delta>0?'+':''}${c.delta}% — a strong candidate for incremental budget.`,
+    rationale:c=>`Category Analyst surfaces categories whose ROI is both above the business average and still improving. ${c.name} has led Tira for 2 consecutive months.`,
+    steps:["Model a 15–20% budget increase for Fragrance next month","Confirm inventory can support the extra demand","Track ROI weekly to catch saturation early"]},
+  {id:204,sev:'info',agent:'Category Analyst',time:'3h ago',category:'Grocery & Staples',biz:'Jiomart',
+    title:c=>`${c.name} is Jiomart's fastest-compounding category`,
+    detail:c=>`ROI ${c.roi}x and climbing ${c.delta>0?'+':''}${c.delta}% — the single biggest scale opportunity in the newly onboarded business.`,
+    rationale:c=>`Category Analyst surfaces categories whose ROI is both above the business average and still improving. ${c.name} has led Jiomart since onboarding.`,
+    steps:["Model a 15–20% budget increase for Grocery & Staples next month","Confirm fulfillment capacity can support the extra demand","Track ROI weekly to catch saturation early"]},
+  {id:205,sev:'warning',agent:'Category Analyst',time:'5h ago',category:'Footwear & Accessories',biz:'Reliance Trends',
+    title:c=>`${c.name} ROI is trailing the rest of Reliance Trends`,
+    detail:c=>`ROI is ${c.roi}x against Reliance Trends' blended 22.6x, up only ${c.delta}% — worth a look before scaling spend further.`,
+    rationale:c=>`Category Analyst benchmarks every category's ROI against its business's blended average. ${c.name} has trailed that bar since onboarding.`,
+    steps:["Audit SKU-level margin and promo depth in this category","Test a smaller, more targeted audience before scaling spend","Revisit in 4 weeks against the Reliance Trends blended benchmark"]}
+];
+function findCategory(name){ return CATEGORY_DATA.find(c=>c.name===name); }
+function categoryRowHTML(c){
+  const dim=!bizVisible(c.biz)?' dimmed':'';
+  return `<tr class="${dim}"><td class="name">${c.name} <span class="biz-tag">${c.biz}</span></td><td>${money(c.spend)}</td><td>${money(c.rev)}</td><td>${c.roi}x</td><td>${deltaHTML(c.delta)}</td></tr>`;
+}
+function categoryInsightCardHTML(ins,idx){
+  const cat=findCategory(ins.category);
+  if(!cat) return '';
+  const dim=!bizVisible(ins.biz)?' dimmed':'';
+  return `<div class="ins-card${dim}" onclick="openCategoryInsight(${ins.id})">
+    <div class="ins-top"><span class="ins-num">N°${idx+1}</span><span class="ins-badge ${ins.sev}">${ins.sev}</span><span class="biz-tag">${ins.biz}</span><span class="ins-time">${ins.time}</span></div>
+    <div class="ins-title">${ins.title(cat)}</div>
+    <div class="ins-detail">${ins.detail(cat)}</div>
+    <div class="ins-agent">▹ ${ins.agent}</div>
+  </div>`;
+}
+function renderCategorySection(){
+  const el=document.getElementById('categorySection');
+  if(!isOnboarded(currentBusiness)){ el.innerHTML=notOnboardedNote('Category-level performance'); return; }
+  const table=`<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Category performance</div><div class="panel-sub">Fashion, beauty, grocery and value-fashion categories across all 4 businesses — spend and revenue reconcile exactly to each business's total</div></div></div><table class="table"><thead><tr><th>Category</th><th>Spend</th><th>Revenue</th><th>ROI</th><th>Δ YoY</th></tr></thead><tbody>${CATEGORY_DATA.map(categoryRowHTML).join('')}</tbody></table></div>`;
+  const insights=`<div class="panel"><div class="panel-head"><div><div class="panel-title">Category anomalies</div><div class="panel-sub">Detected by Category Analyst · click any card for the background</div></div><span class="badge yellow">${CATEGORY_INSIGHTS.length} items</span></div><div class="ins-feed">${CATEGORY_INSIGHTS.map(categoryInsightCardHTML).join('')}</div></div>`;
+  el.innerHTML=table+insights;
+}
+function openCategoryInsight(id){
+  const ins=CATEGORY_INSIGHTS.find(x=>x.id===id);
+  if(!ins) return;
+  const cat=findCategory(ins.category);
+  openModal(ins.title(cat),`
+    <div class="modal-grid"><div class="modal-box"><span>Business</span><b>${ins.biz}</b></div><div class="modal-box"><span>Category</span><b>${ins.category}</b></div><div class="modal-box"><span>Raised by</span><b>${ins.agent}</b></div><div class="modal-box"><span>Detected</span><b>${ins.time}</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${ins.detail(cat)}</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">${ins.rationale(cat)}</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${ins.steps.map((s,i)=>(i+1)+'. '+s).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="queueAction('${ins.category.replace(/'/g,"\\'")} review')">Queue for review</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(ins.category,'Head of Category')}
+  `);
+}
+/* ---------- market & customer signal deep-dives ----------
+   Each figure below is derived from data already in this prototype
+   (channel/category spend, ROI, CAC, delta) rather than invented —
+   e.g. the CAC gap is traced to the specific category + channel
+   combination actually driving it. ---------------------------- */
+const MARKET_SIGNALS=[
+  {id:301,agent:'Market Agent',time:'6h ago',biz:'All',metric:'18.7% portfolio share (+1.3pp)',
+    title:'AJIO is driving the entire portfolio share gain — concentrated in Women\'s Fashion',
+    detail:'Portfolio category share is up 1.3pp to 18.7%. The gain is entirely AJIO\'s: Women\'s Fashion is up 9.1% YoY (₹34 Cr spend → ₹890 Cr revenue, 26.2x ROI) and has taken ~2.1pp of share directly from Myntra. Men\'s Fashion and Footwear share held flat. Tira\'s share is flat at ~9.4% against Nykaa and Purplle — no gain, no loss.',
+    rationale:'Market Agent reads weekly category-share panel data across each business\'s named competitor set. It isolates a share move to a specific category before crediting the whole business, which is why this is being flagged as a Women\'s Fashion story rather than a broad AJIO story.',
+    steps:['Confirm the Women\'s Fashion festive-catalog push (PMax + Search brand) stays funded through month-end','Ask the Women\'s Fashion category lead which SKUs/creatives are driving the Myntra share transfer, so it can be repeated','Watch for a share giveback once Myntra\'s own festive campaign goes live — Market Agent will flag any reversal >0.3pp']},
+  {id:302,agent:'Acquisition Agent',time:'4h ago',biz:'Tira',metric:'₹846 CAC vs AJIO\'s ~₹682 (+24%)',
+    title:'Tira\'s CAC gap vs. AJIO traces to Haircare & Personal Care and Influencer/Affiliate',
+    detail:'Tira\'s blended CAC (₹846) is 24% above AJIO\'s (~₹682). Two-thirds of the gap is explained by: (1) Haircare & Personal Care — the weakest category across both businesses, ROI down 11.2% YoY as CAC has drifted up; and (2) Influencer/Affiliate — the channel Tira over-indexes on, running ₹918 CAC and only 17.6x ROI, the lowest of any channel in the portfolio.',
+    rationale:'Acquisition Agent decomposes a business-level CAC gap into the categories and channels responsible, rather than leaving it as a single number — Haircare & Personal Care and Influencer/Affiliate together account for most of the divergence; the remaining Tira categories are within 8% of AJIO\'s CAC.',
+    steps:['Audit the Influencer/Affiliate creator roster feeding Tira and pause the bottom-quartile by ROI (same fix already queued for the portfolio-wide Influencer review)','Review Haircare & Personal Care targeting and creative for the source of the CAC drift before increasing its budget further','Re-benchmark Tira vs. AJIO CAC monthly until the gap closes below ~15%']},
+  {id:303,agent:'Customer Agent',time:'8h ago',biz:'All',metric:'+₹5.2 Cr modeled headroom',
+    title:'The highest-value repeat cohort is under-weighted in CRM send allocation',
+    detail:'Database/CRM is the portfolio\'s most efficient channel at 32.9x ROI on ₹8.7 Cr spend — but only ~14% of send volume currently reaches the top-quintile repeat-purchase cohort, even though that cohort converts and retains well above the channel average. Customer Agent models +₹5.2 Cr of incremental revenue at similar efficiency if send allocation is rebalanced toward that cohort.',
+    rationale:'Customer Agent compares current send-volume allocation across cohorts against each cohort\'s historical response rate and margin. A cohort is flagged as under-indexed when its share of send volume is materially below its share of modeled value — which is the case here.',
+    steps:['Shift 10–15% of CRM send volume toward the top-quintile repeat cohort','A/B test offer intensity on that cohort before rolling the shift out portfolio-wide','Review incremental lift after one full send cycle (~2 weeks) before making the reallocation permanent']}
+];
+function openMarketSignal(id){
+  const s=MARKET_SIGNALS.find(x=>x.id===id);
+  if(!s) return;
+  openModal(s.title,`
+    <div class="modal-grid"><div class="modal-box"><span>Scope</span><b>${s.biz}</b></div><div class="modal-box"><span>Current read</span><b>${s.metric}</b></div><div class="modal-box"><span>Raised by</span><b>${s.agent}</b></div><div class="modal-box"><span>Detected</span><b>${s.time}</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${s.detail}</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">${s.rationale}</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${s.steps.map((st,i)=>(i+1)+'. '+st).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="queueAction('${s.title.replace(/'/g,"\\'")}')">Queue for review</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(s.title,'Head of Category')}
+  `);
+}
+
+const DATA={
+  subAgents:[
+    {name:'Spend Sentinel',lane:'budget & vendor',status:'ON',last:'Flagged Tira Paid Social overspend · 2h ago'},
+    {name:'ROI Analyst',lane:'efficiency',status:'ON',last:'Modeled Search vs Social reallocation · 3h ago'},
+    {name:'Acquisition Agent',lane:'CAC & growth',status:'ON',last:'Tracked AJIO CAC drift · 5h ago'},
+    {name:'Creative Agent',lane:'fatigue & content',status:'WATCH',last:'Detected fatigue on 2 creative assets · 1h ago'},
+    {name:'Customer Agent',lane:'CRM & cohorts',status:'ON',last:'Sized high-value winback cohort · 6h ago'},
+    {name:'Market Agent',lane:'share & peers',status:'ON',last:'Updated category share read · 1d ago'},
+    {name:'Sentiment Agent',lane:'customer feedback & reviews',status:'WATCH',last:'Flagged rising complaint theme on 1 SKU · 3h ago'},
+    {name:'Logistics Agent',lane:'reverse logistics & returns',status:'WATCH',last:'Flagged return-rate spike on 1 SKU · 5h ago'},
+    {name:'Campaign Agent',lane:'top-5 deep-dive & creative mix',status:'ON',last:'Flagged YOU. MORE THAN ANYTHING. running over monthly budget · 2h ago'},
+    {name:'Competitor Intel Agent',lane:'Myntra, Nykaa, BigBasket & Zudio tracking',status:'ON',last:'Refreshed price/discount index · 12h ago'}
+  ],
+  // Real, well-known agency / martech / measurement names used for contextual realism.
+  channels:[
+    {name:'Performance Marketing',spend:38.4,rev:980,roi:25.5,cac:692,delta:6.8,status:'good',newCustM:0.95,footfallGrowth:4.4,installsGrowth:7.8,acqGrowth:5.2},
+    {name:'Brand Marketing',spend:22.1,rev:410,roi:18.6,cac:null,delta:3.4,status:'good',newCustM:0.40,footfallGrowth:2.2,installsGrowth:3.9,acqGrowth:2.6},
+    {name:'SEO / GEO',spend:7.8,rev:402,roi:51.5,cac:438,delta:13.8,status:'good',newCustM:0.39,footfallGrowth:8.9,installsGrowth:15.9,acqGrowth:10.6},
+    {name:'Creative & Content',spend:14.6,rev:212,roi:14.5,cac:null,delta:-4.2,status:'warn',newCustM:0.21,footfallGrowth:-2.7,installsGrowth:-4.8,acqGrowth:-3.2},
+    {name:'Database / CRM',spend:8.7,rev:286,roi:32.9,cac:512,delta:18.7,status:'good',newCustM:0.28,footfallGrowth:12.0,installsGrowth:21.5,acqGrowth:14.3},
+    {name:'Influencer / Affiliate',spend:10.2,rev:180,roi:17.6,cac:918,delta:-8.1,status:'bad',newCustM:0.17,footfallGrowth:-5.2,installsGrowth:-9.3,acqGrowth:-6.2}
+  ],
+  // [name, typeLabel, category('agency'|'tool'), spend, rev, roi, delta%, status]
+  // [name, typeLabel, category, spend, rev, roi, delta%, status, newCustM, footfallGrowth%, installsGrowth%, acqGrowth%]
+  vendors:[
+    ['Interactive Avenues','Performance agency','agency',11.8,308,26.1,4.2,'good',0.299,2.7,4.8,3.2],
+    ['GroupM','Performance agency','agency',7.4,149,20.1,1.8,'good',0.145,1.2,2.1,1.4],
+    ['Ogilvy','Creative agency','agency',5.9,96,16.3,-2.1,'warn',0.093,-1.4,-2.4,-1.6],
+    ['Qyuki Digital Media','Content vendor','agency',3.8,55,14.5,-3.4,'warn',0.053,-2.2,-3.9,-2.6],
+    ['CleverTap','CRM / engagement platform','tool',3.2,126,39.4,6.7,'good',0.122,4.3,7.7,5.1],
+    ['SEMrush','SEO / GEO tooling','tool',1.7,82,48.2,9.1,'good',0.080,5.9,10.5,7.0],
+    ['Kantar','Measurement partner','tool',1.1,0,null,0,'warn',0,0,0,0]
+  ],
+  allocation:[['Performance Marketing',38.4,980,25.5,30.4],['Brand Marketing',22.1,410,18.6,17.5],['Creative & Content',14.6,212,14.5,11.6],['Influencer / Affiliate',10.2,180,17.6,8.1],['Database / CRM',8.7,286,32.9,6.9],['SEO / GEO',7.8,402,51.5,6.2]],
+  queueItems:[
+    {id:0,section:'warning',sev:'red',biz:'Tira',title:'Tira Paid Social is 14% above budget while ROI is down 9% MoM.',detail:'Spend is compounding while efficiency declines — this is the top financial risk in the portfolio right now.',impact:'-₹1.9 Cr risk',agent:'Spend Sentinel',cta:'Review',rationale:'Spend Sentinel flags any pool that crosses 110% of its monthly budget while its trailing-7-day ROI is falling. Tira Paid Social (Fenty Beauty, KIKO Milano creatives) has done both for 9 consecutive days.',steps:['Pull the 3 highest-spend campaigns in this pool for a creative/audience review','Cap daily spend at the approved budget pending review','Ask Creative Agent whether fatigue is contributing (it already flagged 3 campaigns)']},
+    {id:1,section:'warning',sev:'',biz:'AJIO',title:'AJIO Women\'s Fashion CAC is up 7% in four weeks.',detail:'Acquisition Agent sees this as a slow drift, not a spike — worth watching before it compounds.',impact:'-₹0.8 Cr efficiency',agent:'Acquisition Agent',cta:'Investigate',rationale:'CAC has risen for 4 straight weekly reads on AJIO OWN and Biba campaigns. Category revenue growth is still healthy, so this is an efficiency story rather than a demand story.',steps:['Compare bid strategy changes over the last 4 weeks','Check whether new-vs-repeat customer mix has shifted','Hold budget flat until CAC stabilizes for 2 consecutive weeks']},
+    {id:2,section:'warning',sev:'red',biz:'Tira',title:'YOU. MORE THAN ANYTHING. brand campaign is running at 118% of its monthly budget.',detail:'Spend is pacing well ahead of plan for the month — the highest overbudget variance of any campaign in the portfolio right now.',impact:'-₹1.5 Cr over plan',agent:'Spend Sentinel',cta:'Review',rationale:'Spend Sentinel flags any brand campaign that crosses 110% of its approved monthly budget. This campaign has held above that line for 9 straight days, driven by an extended influencer amplification push.',steps:['Confirm whether the extended push was pre-approved or is organic overspend','Cap daily spend at the approved budget pending a decision','Loop in Head of Brand before the campaign re-enters positive pacing']},
+    {id:3,section:'warning',sev:'red',biz:'Tira',title:'Influencer pool ROI is 18% below the portfolio median.',detail:'A small number of creators are dragging the whole pool\'s efficiency down.',impact:'-₹0.6 Cr downside',agent:'ROI Analyst',cta:'Reallocate',rationale:'ROI Analyst benchmarks every pool against the trailing 90-day portfolio median. Influencer has missed that bar for 6 of the last 8 weeks, concentrated in a handful of beauty creators.',steps:['Rank creators by ROI and pause the bottom quartile','Reallocate freed budget to Search (see linked opportunity)','Revisit in 30 days with the reduced roster']},
+    {id:12,section:'warning',sev:'red',biz:'Tira',title:'Makeup marketing spend is 20% over its monthly budget while category revenue is down 8%.',detail:'Actual spend is running at ~₹19.2 Cr against a ₹16 Cr plan (+₹3.2 Cr) while category revenue has fallen 8% over the same period — spend and revenue are moving in opposite directions in Tira\'s largest beauty category.',impact:'₹3.2 Cr budget risk',agent:'Category Analyst',cta:'Review',rationale:'Category Analyst escalates when a category is both over its monthly budget and moving against revenue expectations. Makeup has held above 115% of plan for the trailing week while category revenue has fallen for 2 consecutive months — the sharpest budget/revenue mismatch in Tira\'s portfolio right now.',steps:['Pull channel-level spend and conversion for Makeup over the last 8 weeks','Confirm whether the overage was pre-approved or is organic overspend','Cap spend at the approved budget pending a margin/demand review']},
+    {id:4,section:'warning',sev:'',biz:'All',title:'Women\'s Fashion and Skincare are pacing at 106% and 104% of monthly plan.',detail:'Women\'s Fashion is at ~₹36.2 Cr against a ₹34 Cr plan (+₹2.2 Cr); Skincare is at ~₹19.8 Cr against a ₹19 Cr plan (+₹0.8 Cr) — ₹3.0 Cr combined overage, both still inside an extended festive/routine-refresh push.',impact:'₹3.0 Cr budget risk',agent:'Spend Sentinel',cta:'Review',rationale:'Spend Sentinel flags any category pacing above 102% of its monthly plan for more than 5 days without a logged exception. Both categories have carried a seasonal push past their planned end date.',steps:['Confirm with the Women\'s Fashion and Skincare category leads whether the extended push is an approved exception','If unapproved, cap both categories at 100% of plan for the remainder of the month','Reconcile actual vs. plan at month-close before setting next month\'s category budgets']},
+    {id:5,section:'opp',sev:'green',biz:'AJIO',title:'SEO / GEO organic revenue is up 19% YoY.',detail:'The cheapest acquisition channel in the portfolio is also the fastest-growing, led by AJIO\'s fashion catalog.',impact:'+₹4.2 Cr run-rate',agent:'Market Agent',cta:'Scale',rationale:'GEO visibility (AI-answer surfaces) is compounding alongside classic organic search via SEMrush tracking, and neither shows saturation yet.',steps:['Brief the content team on the highest-intent gaps','Protect this channel\'s budget from any portfolio-wide cuts','Report progress to the CMO monthly']},
+    {id:6,section:'opp',sev:'green',biz:'All',title:'CRM has the lowest CAC among every paid growth pool.',detail:'There is real headroom to scale frequency into high-value cohorts without hurting unit economics.',impact:'+₹5.2 Cr headroom',agent:'Customer Agent',cta:'Test',rationale:'CRM CAC (₹512, via CleverTap) is 26% below the next-best paid pool, and repeat-purchase rate has climbed 2.1pp — the cohort is ready for more, not less.',steps:['Launch the winback journey on the high-value lapsed cohort','Track incremental revenue vs. a holdout group','Scale frequency only if the holdout test clears']},
+    {id:7,section:'opp',sev:'green',biz:'All',title:'Search is outperforming Paid Social on ROI.',detail:'Modeled reallocation shows a clean efficiency gain with limited execution risk.',impact:'+11% modeled efficiency',agent:'ROI Analyst',cta:'Shift',rationale:'This is the same reallocation captured in the CMO Decisions panel below — see "Shift ₹2.4 Cr from Paid Social → Search" for full rationale.',steps:['Open the linked CMO decision for the full financial model','Approve or request a smaller pilot shift first']},
+    {id:8,section:'action',sev:'',biz:'All',title:'Shift ₹2.4 Cr from Paid Social → Search',detail:'Ready for approval — modeled and queued by ROI Analyst.',impact:'Projected +₹4.8 Cr revenue',agent:'ROI Analyst',cta:'Approve',rationale:'Search has delivered higher ROI at a lower CAC than Paid Social across every comparable cohort for the last 60 days (tracked via SEMrush + GroupM media data).',steps:['Approve to push the reallocation to the media buying layer','Impact will be tracked automatically in Action History']},
+    {id:9,section:'action',sev:'',biz:'Tira',title:'Cap YOU. MORE THAN ANYTHING. spend at approved monthly budget',detail:'Ready for approval — queued by Spend Sentinel.',impact:'Protects ₹1.5 Cr over-plan spend',agent:'Spend Sentinel',cta:'Approve',rationale:'Capping daily spend at the approved budget stops the overbudget variance from compounding while Head of Brand confirms whether the extended push was pre-approved.',steps:['Approve to trigger the daily spend cap','Campaign resumes normal pacing once budget is confirmed or reset next month']},
+    {id:10,section:'action',sev:'',biz:'All',title:'Scale high-value CRM cohort journey',detail:'Ready for approval — queued by Customer Agent.',impact:'Projected +₹2.6 Cr revenue',agent:'Customer Agent',cta:'Approve',rationale:'The CleverTap-powered winback journey has cleared its holdout test in a pilot cohort and is ready for the full high-value segment.',steps:['Approve to expand from pilot to full cohort','A holdout group will be retained automatically for measurement']},
+    {id:11,section:'warning',sev:'red',biz:'Tira',title:'Haircare & Personal Care spend is up 9.3% while category revenue is down 11.2%.',detail:'Spend and revenue are moving in opposite directions — the sharpest divergence of any category in the portfolio.',impact:'-₹1.1 Cr efficiency',agent:'Category Analyst',cta:'Review',rationale:'Category Analyst flags any category where spend and revenue move in opposite directions for 2+ consecutive months. The divergence here is concentrated in Performance Marketing and Influencer/Affiliate channel spend on this category, which have scaled without a matching lift in sell-through.',steps:['Pull channel-level spend and conversion for this category over the last 8 weeks','Test whether the drop is demand-side (efficacy complaints, per Sentiment Agent) or channel-side (targeting/creative)','Hold or reallocate incremental spend on this category pending the read']},
+    {id:13,section:'opp',sev:'green',biz:'Jiomart',title:'Jiomart SEO/GEO organic revenue is compounding at 39x ROI.',detail:'The cheapest acquisition channel in the newly onboarded business is already its most efficient — well ahead of paid channels.',impact:'+₹1.8 Cr run-rate',agent:'Market Agent',cta:'Scale',rationale:'GEO visibility (AI-answer surfaces) is compounding alongside classic organic search for Jiomart, and neither shows saturation yet.',steps:['Brief the content team on the highest-intent grocery/staples search gaps',"Protect this channel's budget from any portfolio-wide cuts",'Report progress to the CMO monthly']},
+    {id:14,section:'warning',sev:'',biz:'Reliance Trends',title:'Reliance Trends Influencer/Affiliate ROI is 15.2x, below the portfolio median.',detail:'Newly onboarded and already showing the same efficiency pattern seen in Tira\'s influencer pool — worth an early creator-cohort review.',impact:'-₹0.3 Cr downside',agent:'ROI Analyst',cta:'Reallocate',rationale:'ROI Analyst benchmarks every pool against the trailing 90-day portfolio median. Reliance Trends\' Influencer/Affiliate pool has missed that bar since onboarding.',steps:['Rank creators by ROI and pause the bottom quartile','Reallocate freed budget to Performance Marketing or SEO/GEO','Revisit in 30 days with the reduced roster']}
+  ],
+  decisions:[
+    {tag:'Reallocate',biz:'All',title:'Shift ₹2.4 Cr from Paid Social → Search',copy:'Search is delivering higher ROI at a lower CAC in comparable acquisition cohorts.',metrics:[['Current','₹18.6 Cr'],['Proposed','₹16.2 Cr'],['Upside','+₹4.8 Cr'],['Confidence','Illustrative']],tone:'greenline'},
+    {tag:'Intervene',biz:'Tira',title:'Tira Paid Social needs a budget + creative review',copy:'Spend on Fenty Beauty and KIKO Milano campaigns is above plan while efficiency is declining; the engine flags this as a near-term intervention.',metrics:[['Spend vs plan','114%'],['ROI MoM','-9%'],['CAC','₹912'],['Risk','₹1.9 Cr']],tone:'redline'},
+    {tag:'Scale',biz:'All',title:'Expand CRM in high-value cohorts',copy:'CRM shows strong revenue contribution and low CAC, with room to scale frequency carefully.',metrics:[['ROI','32.9x'],['CAC','₹512'],['Headroom','₹5.2 Cr'],['Test','3 cohorts']],tone:'greenline'}
+  ]
+};
+
+/* ---------- per-business data build (runs once at load) ---------- */
+function round(n,d){ if(n==null) return null; const m=Math.pow(10,d); return Math.round(n*m)/m; }
+/* ---------- Jiomart & Reliance Trends: independent channel/vendor breakdowns ----------
+   These two businesses have their own channel/vendor breakdowns (separate from the shared
+   AJIO+Tira arrays above). Each reconciles to its own BU_TOTALS entry; the 'All businesses'
+   view merges all 4 businesses' channels/vendors by name (see mergeNamedPools below) so the
+   portfolio aggregate reconciles across AJIO + Tira + Jiomart + Reliance Trends. */
+const ONLINE_ONLY_BIZ=['AJIO','Jiomart'];
+const NO_APP_BIZ=['Reliance Trends']; // Reliance Trends has no dedicated app — installs/app-adoption metrics are N/A
+const JIOMART_CHANNELS=[
+  {name:'Performance Marketing',spend:22.0,rev:620,roi:28.2,cac:430,delta:9.2,status:'good',newCustM:1.35,footfallGrowth:null,installsGrowth:14.8,acqGrowth:11.2},
+  {name:'Brand Marketing',spend:8.5,rev:190,roi:22.4,cac:null,delta:4.1,status:'good',newCustM:0.45,footfallGrowth:null,installsGrowth:6.2,acqGrowth:4.8},
+  {name:'SEO / GEO',spend:4.2,rev:165,roi:39.3,cac:290,delta:16.4,status:'good',newCustM:0.42,footfallGrowth:null,installsGrowth:18.6,acqGrowth:15.1},
+  {name:'Creative & Content',spend:5.8,rev:120,roi:20.7,cac:null,delta:-1.8,status:'warn',newCustM:0.28,footfallGrowth:null,installsGrowth:-2.1,acqGrowth:-1.4},
+  {name:'Database / CRM',spend:7.5,rev:185,roi:24.7,cac:340,delta:14.2,status:'good',newCustM:0.38,footfallGrowth:null,installsGrowth:16.9,acqGrowth:13.4},
+  {name:'Influencer / Affiliate',spend:4.0,rev:60,roi:15.0,cac:null,delta:-3.5,status:'warn',newCustM:0.22,footfallGrowth:null,installsGrowth:-4.2,acqGrowth:-2.8}
+];
+const JIOMART_VENDORS=[
+  {name:'GroupM',type:'Performance agency',category:'agency',spend:6.5,rev:142,roi:21.8,delta:5.2,status:'good',newCustM:0.32,footfallGrowth:null,installsGrowth:6.8,acqGrowth:5.1},
+  {name:'Interactive Avenues',type:'Performance agency',category:'agency',spend:4.9,rev:103,roi:21.0,delta:3.1,status:'good',newCustM:0.24,footfallGrowth:null,installsGrowth:4.4,acqGrowth:3.3},
+  {name:'CleverTap',type:'CRM / engagement platform',category:'tool',spend:1.3,rev:47,roi:36.2,delta:8.4,status:'good',newCustM:0.09,footfallGrowth:null,installsGrowth:9.6,acqGrowth:7.2},
+  {name:'SEMrush',type:'SEO / GEO tooling',category:'tool',spend:0.8,rev:27,roi:33.8,delta:11.2,status:'good',newCustM:0.05,footfallGrowth:null,installsGrowth:12.4,acqGrowth:9.8}
+];
+const TRENDS_CHANNELS=[
+  {name:'Performance Marketing',spend:13.8,rev:322,roi:23.3,cac:398,delta:5.4,status:'good',newCustM:0.79,footfallGrowth:6.8,installsGrowth:null,acqGrowth:5.6},
+  {name:'Brand Marketing',spend:6.9,rev:148,roi:21.4,cac:null,delta:2.9,status:'good',newCustM:0.31,footfallGrowth:4.2,installsGrowth:null,acqGrowth:2.7},
+  {name:'SEO / GEO',spend:2.1,rev:76,roi:36.2,cac:250,delta:12.8,status:'good',newCustM:0.18,footfallGrowth:2.1,installsGrowth:null,acqGrowth:8.4},
+  {name:'Creative & Content',spend:4.0,rev:78,roi:19.5,cac:null,delta:-2.4,status:'warn',newCustM:0.15,footfallGrowth:-1.6,installsGrowth:null,acqGrowth:-2.1},
+  {name:'Database / CRM',spend:4.8,rev:112,roi:23.3,cac:280,delta:10.6,status:'good',newCustM:0.26,footfallGrowth:5.9,installsGrowth:null,acqGrowth:6.3},
+  {name:'Influencer / Affiliate',spend:2.9,rev:44,roi:15.2,cac:null,delta:-4.8,status:'warn',newCustM:0.11,footfallGrowth:-2.4,installsGrowth:null,acqGrowth:-3.2}
+];
+const TRENDS_VENDORS=[
+  {name:'Ogilvy',type:'Creative agency',category:'agency',spend:4.6,rev:96,roi:20.9,delta:-1.2,status:'warn',newCustM:0.19,footfallGrowth:-0.8,installsGrowth:null,acqGrowth:-1.1},
+  {name:'Interactive Avenues',type:'Performance agency',category:'agency',spend:3.7,rev:76,roi:20.5,delta:2.4,status:'good',newCustM:0.15,footfallGrowth:1.8,installsGrowth:null,acqGrowth:2.0},
+  {name:'CleverTap',type:'CRM / engagement platform',category:'tool',spend:1.3,rev:58,roi:44.6,delta:7.1,status:'good',newCustM:0.07,footfallGrowth:3.4,installsGrowth:null,acqGrowth:5.8},
+  {name:'Kantar',type:'Measurement partner',category:'tool',spend:0.4,rev:0,roi:null,delta:0,status:'warn',newCustM:0,footfallGrowth:0,installsGrowth:null,acqGrowth:0}
+];
+function poolsFor(channels,vendors){
+  return [
+    ...channels.map(c=>({name:c.name,type:'Channel',category:'channel',spend:c.spend,rev:c.rev,roi:c.roi,delta:c.delta,status:c.status,newCustM:c.newCustM,footfallGrowth:c.footfallGrowth,installsGrowth:c.installsGrowth,acqGrowth:c.acqGrowth})),
+    ...vendors
+  ];
+}
+/* Merge same-named pool rows (channels or vendors) across all 4 businesses into a single
+   portfolio-level row, so the 'All businesses' view reconciles to the true 4-business total
+   instead of only AJIO + Tira. Spend/revenue are summed; rates are spend-weighted averages;
+   null growth metrics (e.g. Reliance Trends' app installs — no app) are skipped, not zeroed. */
+function mergeNamedPools(arraysOfPools){
+  const map={}, order=[];
+  arraysOfPools.forEach(arr=>arr.forEach(p=>{
+    if(!map[p.name]){ map[p.name]={name:p.name,type:p.type,category:p.category,spend:0,rev:0,newCustM:0,deltaW:0,ffW:0,ffHas:false,instW:0,instHas:false,acqW:0,cacs:[]}; order.push(p.name); }
+    const m=map[p.name], sp=p.spend||0;
+    m.spend+=sp; m.rev+=(p.rev||0); m.newCustM+=(p.newCustM||0);
+    m.deltaW+=(p.delta||0)*sp;
+    if(p.footfallGrowth!=null){ m.ffW+=p.footfallGrowth*sp; m.ffHas=true; }
+    if(p.installsGrowth!=null){ m.instW+=p.installsGrowth*sp; m.instHas=true; }
+    m.acqW+=(p.acqGrowth||0)*sp;
+    if(p.cac!=null) m.cacs.push(p.cac);
+  }));
+  return order.map(name=>{
+    const m=map[name];
+    const roi = m.rev>0 ? round(m.rev/m.spend,1) : (m.spend>0? 0 : null);
+    const status = roi==null?'warn':roi>=22?'good':roi>=15?'warn':'bad';
+    return {
+      name:m.name, type:m.type, category:m.category,
+      spend:round(m.spend,1), rev:round(m.rev,0), roi,
+      cac: m.cacs.length? Math.round(m.cacs.reduce((a,b)=>a+b,0)/m.cacs.length): null,
+      delta: m.spend? round(m.deltaW/m.spend,1):0, status,
+      newCustM: round(m.newCustM,3),
+      footfallGrowth: m.ffHas? round(m.ffW/m.spend,1): null,
+      installsGrowth: m.instHas? round(m.instW/m.spend,1): null,
+      acqGrowth: m.spend? round(m.acqW/m.spend,1):0
+    };
+  });
+}
+
+function buildByBusiness(){
+  function buildFor(biz){
+    const isAjio = biz==='AJIO';
+    const targetSpend = BU_TOTALS[biz].spend, targetRev = BU_TOTALS[biz].rev, targetNewCust = BU_TOTALS[biz].newCustN;
+    const rawSpend = DATA.channels.map(c=> c.spend * (isAjio? CHANNEL_AJIO_WEIGHT[c.name] : (1-CHANNEL_AJIO_WEIGHT[c.name])) );
+    const rawRev   = DATA.channels.map(c=> c.rev   * (isAjio? CHANNEL_AJIO_WEIGHT[c.name] : (1-CHANNEL_AJIO_WEIGHT[c.name])) );
+    const rawNewCust = DATA.channels.map(c=> c.newCustM * (isAjio? CHANNEL_AJIO_WEIGHT[c.name] : (1-CHANNEL_AJIO_WEIGHT[c.name])) );
+    const spendSum = rawSpend.reduce((a,b)=>a+b,0) || 1;
+    const revSum   = rawRev.reduce((a,b)=>a+b,0) || 1;
+    const newCustSum = rawNewCust.reduce((a,b)=>a+b,0) || 1;
+    const spendScale = targetSpend/spendSum, revScale = targetRev/revSum, newCustScale = targetNewCust/newCustSum;
+    const cacMult = BU_TOTALS[biz].cac / BU_TOTALS['All businesses'].cac;
+    const channels = DATA.channels.map((c,i)=>{
+      const spend = round(rawSpend[i]*spendScale,1);
+      const rev   = round(rawRev[i]*revScale,0);
+      const roi   = spend? round(rev/spend,1) : 0;
+      const cac   = c.cac? Math.round(c.cac*cacMult) : null;
+      const status = roi>=22?'good':roi>=15?'warn':'bad';
+      const newCustM = round(rawNewCust[i]*newCustScale,2);
+      return {name:c.name, spend, rev, roi, cac, delta:c.delta, status, newCustM, footfallGrowth:c.footfallGrowth, installsGrowth:c.installsGrowth, acqGrowth:c.acqGrowth};
+    });
+    const vendors = DATA.vendors.map(v=>{
+      const w = VENDOR_AJIO_WEIGHT[v[0]] ?? .5;
+      const factor = isAjio? w : (1-w);
+      const spend = round(v[3]*factor,1);
+      const rev   = v[4]? round(v[4]*factor,0) : 0;
+      const roi   = (spend&&rev)? round(rev/spend,1) : null;
+      const newCustM = round(v[8]*factor,3);
+      return {name:v[0], type:v[1], category:v[2], spend, rev, roi, delta:v[6], status:v[7], newCustM, footfallGrowth:v[9], installsGrowth:v[10], acqGrowth:v[11]};
+    });
+    const pools=[
+      ...channels.map(c=>({name:c.name,type:'Channel',category:'channel',spend:c.spend,rev:c.rev,roi:c.roi,delta:c.delta,status:c.status,newCustM:c.newCustM,footfallGrowth:c.footfallGrowth,installsGrowth:c.installsGrowth,acqGrowth:c.acqGrowth})),
+      ...vendors
+    ];
+    const monthlySpendScale = targetSpend/BU_TOTALS['All businesses'].spend;
+    const monthlyRevScale = targetRev/BU_TOTALS['All businesses'].rev;
+    const spendM = BASE_MONTHLY.spend.map(v=>round(v*monthlySpendScale,1));
+    const revM = BASE_MONTHLY.revenue.map(v=>round(v*monthlyRevScale,0));
+    const roasM = spendM.map((s,i)=>s?round(revM[i]/s,1):0);
+    return {channels, vendors, pools, totals:BU_TOTALS[biz], monthly:{labels:BASE_MONTHLY.labels, spend:spendM, revenue:revM, roas:roasM}};
+  }
+  const DATA_CHANNELS_NAMED = DATA.channels.map(c=>({name:c.name,type:'Channel',category:'channel',spend:c.spend,rev:c.rev,roi:c.roi,delta:c.delta,status:c.status,newCustM:c.newCustM,footfallGrowth:c.footfallGrowth,installsGrowth:c.installsGrowth,acqGrowth:c.acqGrowth}));
+  const DATA_VENDORS_NAMED = DATA.vendors.map(v=>({name:v[0],type:v[1],category:v[2],spend:v[3],rev:v[4],roi:v[5],delta:v[6],status:v[7],newCustM:v[8],footfallGrowth:v[9],installsGrowth:v[10],acqGrowth:v[11]}));
+  const JIOMART_CHANNELS_NAMED = JIOMART_CHANNELS.map(c=>({...c,type:'Channel',category:'channel'}));
+  const TRENDS_CHANNELS_NAMED = TRENDS_CHANNELS.map(c=>({...c,type:'Channel',category:'channel'}));
+  // 'All businesses' now reconciles to the full 4-business portfolio: channels and vendors are
+  // merged by name across AJIO+Tira (DATA.channels/vendors), Jiomart and Reliance Trends.
+  const ALL_CHANNELS = mergeNamedPools([DATA_CHANNELS_NAMED, JIOMART_CHANNELS_NAMED, TRENDS_CHANNELS_NAMED]);
+  const ALL_VENDORS = mergeNamedPools([DATA_VENDORS_NAMED, JIOMART_VENDORS, TRENDS_VENDORS]);
+  DATA.byBusiness = {
+    'All businesses': {
+      channels: ALL_CHANNELS,
+      vendors: ALL_VENDORS,
+      pools: [...ALL_CHANNELS, ...ALL_VENDORS],
+      totals: BU_TOTALS['All businesses'],
+      monthly: BASE_MONTHLY_WITH_ROI()
+    },
+    'AJIO': buildFor('AJIO'),
+    'Tira': buildFor('Tira')
+  };
+  function buildStandalone(biz, channels, vendors){
+    const monthlySpendScale = BU_TOTALS[biz].spend/BU_TOTALS['All businesses'].spend;
+    const monthlyRevScale = BU_TOTALS[biz].rev/BU_TOTALS['All businesses'].rev;
+    const spendM = BASE_MONTHLY.spend.map(v=>round(v*monthlySpendScale,1));
+    const revM = BASE_MONTHLY.revenue.map(v=>round(v*monthlyRevScale,0));
+    const roasM = spendM.map((sp,i)=>sp?round(revM[i]/sp,1):0);
+    return { channels, vendors, pools: poolsFor(channels,vendors), totals: BU_TOTALS[biz], monthly:{labels:BASE_MONTHLY.labels, spend:spendM, revenue:revM, roas:roasM} };
+  }
+  DATA.byBusiness['Jiomart'] = buildStandalone('Jiomart', JIOMART_CHANNELS, JIOMART_VENDORS);
+  DATA.byBusiness['Reliance Trends'] = buildStandalone('Reliance Trends', TRENDS_CHANNELS, TRENDS_VENDORS);
+}
+function BASE_MONTHLY_WITH_ROI(){
+  const roas=BASE_MONTHLY.spend.map((s,i)=>round(BASE_MONTHLY.revenue[i]/s,1));
+  return {labels:BASE_MONTHLY.labels, spend:BASE_MONTHLY.spend, revenue:BASE_MONTHLY.revenue, roas};
+}
+
+let charts={};let currentPage='control';let currentBusiness='All businesses';
+let mmFilter='all';
+let fullFeedOpen=false;
+const money=n=>n==null?'—':'₹'+Number(n).toFixed(1)+' Cr';
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.opacity='1';el.style.transform='translateY(0)';clearTimeout(window.__toast);window.__toast=setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(8px)'},2200)}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function openModal(title,body){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').classList.add('show')}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+
+/* ---------- trigger: notify a stakeholder by email for this action point ---------- */
+const NOTIFY_ROLES=['Head of Category','Head of Channel','Head of Creative','Head of Agency/Partner','Head of Customer Experience','Head of Supply Chain','Head of Competitive Strategy','CMO Chief of Staff'];
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+/* Standard notify email template — the ask line adapts to the kind of
+   action the flagged item needs (budget/pacing vs. ROI/opportunity vs.
+   creative/campaign vs. generic), so each card gets a relevantly worded
+   draft rather than one generic paragraph. */
+function notifyTemplate(subject,role){
+  const s=String(subject);
+  return `Hi ${role},\n\n${s}\n\nThe metrics shown are indicative, meant to flag the signal early rather than serve as final numbers.\n\nLet's connect to plan the next course of action and discuss further.\n\n— Sent from Reliance Growth OS (AJIO, Tira, Jiomart & Reliance Trends)`;
+}
+function notifyRowHTML(subject,defaultRole){
+  const esc=String(subject).replace(/'/g,"\\'");
+  const escAttr=String(subject).replace(/"/g,'&quot;');
+  return `<div class="notify-row"><select class="filter" id="notifyRole" data-subject="${escAttr}" onchange="refreshNotifyTemplate()">${NOTIFY_ROLES.map(r=>`<option${r===defaultRole?' selected':''}>${r}</option>`).join('')}</select><button class="btn" onclick="sendNotification('${esc}')">✉ Notify</button></div>
+    <textarea class="notify-template" id="notifyTemplate" rows="5">${escHtml(notifyTemplate(subject,defaultRole))}</textarea>`;
+}
+function refreshNotifyTemplate(){
+  const sel=document.getElementById('notifyRole');
+  const ta=document.getElementById('notifyTemplate');
+  if(!sel||!ta) return;
+  ta.value=notifyTemplate(sel.dataset.subject,sel.value);
+}
+function sendNotification(subject){
+  const sel=document.getElementById('notifyRole');
+  const ta=document.getElementById('notifyTemplate');
+  const role=sel?sel.value:'Head of Category';
+  toast(`Email drafted to ${role} — message ready in Outlook (demo)`);
+}
+
+function bizVisible(itemBiz){ return currentBusiness==='All businesses' || itemBiz==='All' || itemBiz===currentBusiness; }
+const NOT_ONBOARDED_BIZ=[];
+function isOnboarded(biz){ return !NOT_ONBOARDED_BIZ.includes(biz); }
+function notOnboardedNote(what){ return `<div class="dq-empty">${what} isn't available yet for ${currentBusiness} — it's newly onboarded onto Growth OS, so only top-line KPIs are live so far.</div>`; }
+function visibleQueueItems(){ return DATA.queueItems.filter(q=>bizVisible(q.biz)); }
+function visibleDecisions(){ return DATA.decisions.map((d,i)=>({...d,_i:i})).filter(d=>bizVisible(d.biz)); }
+
+/* ---------- KPI ribbon (business-aware) ---------- */
+function signTone(s){ const t=String(s).trim(); return t.startsWith('-')?'bad':t.startsWith('+')?'good':'warn'; }
+function renderHero(){
+  const t=BU_TOTALS[currentBusiness];
+  document.getElementById('heroMetrics').innerHTML=[
+    ['Marketing spend',money(t.spend),t.dSpend],
+    ['Revenue contribution via marketing',money(t.rev)+' · '+t.revContribPct+'% of revenue',t.dRevContribPct],
+    ['Repeat customers',t.repeatCust+'%',t.dRepeatCust],
+    ['New customers added',t.newCust,t.dNewCust]
+  ].map(x=>`<div class="kpi-chip"><span class="l">${x[0]}</span><div class="row"><span class="v">${x[1]}</span><span class="m ${signTone(x[2])}">${x[2]}</span></div></div>`).join('');
+}
+
+function renderSubAgents(){document.getElementById('subagentStrip').innerHTML=DATA.subAgents.map(a=>`<span class="agent-pill" title="${a.name} — ${a.lane}. ${a.last}"><span class="live-dot ${a.status==='WATCH'?'watch':''}"></span>${a.name}</span>`).join('')}
+
+/* ---------- decision queue (hero) + full feed (secondary, togglable) ---------- */
+function queueItem(id){return DATA.queueItems.find(q=>q.id===id)}
+function severityRank(item){ if(item.section==='warning') return item.sev==='red'?0:1; if(item.section==='opp') return 2; return 3; }
+function dqCard(item){
+  const barClass = item.sev==='red'?'red':item.sev==='green'?'green':'';
+  return `<div class="dq-card"><div class="bar ${barClass}"></div><div style="min-width:0">
+    <div class="t">${item.title}</div><div class="s">${item.detail}</div>
+    <div class="meta-row"><span class="agent-tag">${item.agent}</span>${item.biz!=='All'?`<span class="biz-tag">${item.biz}</span>`:''}</div>
+  </div><div class="right"><span class="impact ${item.sev==='red'?'bad':item.sev==='green'?'good':'warn'}">${item.impact}</span>
+    <div class="cta-row"><button class="btn primary" onclick="openQueueItem(${item.id})">${item.cta}</button><button class="btn" onclick="toast('Dismissed — will resurface if it persists')">Dismiss</button></div>
+  </div></div>`;
+}
+function renderPriorities(){
+  const items=[...visibleQueueItems()].sort((a,b)=>severityRank(a)-severityRank(b));
+  const picks=items.slice(0,4);
+  document.getElementById('dqTitle').textContent = picks.length ? `${picks.length} decision${picks.length>1?'s':''} need${picks.length>1?'':'s'} you right now` : 'No open decisions right now';
+  document.getElementById('dqSub').textContent = currentBusiness==='All businesses' ? 'Ranked by financial impact and urgency · Portfolio view' : `Ranked by financial impact and urgency · Filtered to ${currentBusiness}`;
+  document.getElementById('priorityList').innerHTML = picks.length ? picks.map(dqCard).join('') : `<div class="dq-empty">${currentBusiness} has no open warnings, opportunities or ready actions right now — full feed still available below.</div>`;
+}
+function signalCard(item){
+  return `<div class="signal rich"><span class="dot ${item.sev}"></span><div style="min-width:0">
+    <div class="t">${item.title}</div><div class="s">${item.detail}</div>
+    <div class="meta-row"><span class="agent-tag">${item.agent}</span>${item.biz!=='All'?`<span class="biz-tag">${item.biz}</span>`:''}</div>
+    <div class="right-row"><b style="font-size:10px">${item.impact}</b>
+      <div class="cta-row"><button class="btn primary" onclick="openQueueItem(${item.id})">${item.cta}</button><button class="btn" onclick="toast('Dismissed — will resurface if it persists')">Dismiss</button></div>
+    </div>
+  </div></div>`;
+}
+function renderFullFeed(){
+  const items=visibleQueueItems();
+  const warnings=items.filter(q=>q.section==='warning'), opps=items.filter(q=>q.section==='opp'), actions=items.filter(q=>q.section==='action');
+  document.getElementById('warningSignals').innerHTML=warnings.map(signalCard).join('')||'<div class="dq-empty">None for this business.</div>';
+  document.getElementById('oppSignals').innerHTML=opps.map(signalCard).join('')||'<div class="dq-empty">None for this business.</div>';
+  document.getElementById('actionSignals').innerHTML=actions.map(signalCard).join('')||'<div class="dq-empty">None for this business.</div>';
+  document.getElementById('warnCount').textContent=warnings.length+' items';
+  document.getElementById('oppCount').textContent=opps.length+' items';
+  document.getElementById('actionCount').textContent=actions.length+' pending';
+  document.getElementById('fullFeedToggleLabel').textContent=(fullFeedOpen?'Hide full feed (':'Show full feed (')+items.length+') '+(fullFeedOpen?'↑':'↓');
+}
+function toggleFullFeed(){ fullFeedOpen=!fullFeedOpen; document.getElementById('fullFeedSection').style.display=fullFeedOpen?'block':'none'; renderFullFeed(); if(fullFeedOpen) document.getElementById('fullFeedSection').scrollIntoView({behavior:'smooth',block:'start'}); }
+function openQueueItem(id){
+  const item=queueItem(id);
+  if(!item) return;
+  openModal(item.title,`
+    <div class="modal-grid"><div class="modal-box"><span>Raised by</span><b>${item.agent}</b></div><div class="modal-box"><span>Impact</span><b>${item.impact}</b></div><div class="modal-box"><span>Type</span><b>${item.section==='warning'?'Warning':item.section==='opp'?'Opportunity':'Ready action'}</b></div><div class="modal-box"><span>Business</span><b>${item.biz==='All'?'Portfolio':item.biz}</b></div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">${item.rationale}</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested control path</div><div class="modal-copy">${item.steps.map((s,i)=>(i+1)+'. '+s).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="queueAction('${item.title.replace(/'/g,"\\'")}')">${item.section==='action'?'Approve':'Queue for review'}</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(item.title,'Head of Channel')}
+  `);
+}
+
+/* ---------- money map (business-aware) ---------- */
+function renderAllocation(){
+  const el=document.getElementById('allocationRows');
+  if(!isOnboarded(currentBusiness)){ el.innerHTML=notOnboardedNote('Pool-level allocation'); return; }
+  const channels=DATA.byBusiness[currentBusiness].channels;
+  const total=channels.reduce((s,c)=>s+c.spend,0)||1;
+  el.innerHTML=`<div class="alloc-row alloc-head"><div>Pool</div><div>Share of spend</div><div class="num">Spend</div><div class="num">Revenue</div><div class="num">ROI</div><div class="num">Revenue MoM Δ</div></div>`+channels.map(c=>`<div class="alloc-row"><div class="alloc-name">${c.name}</div><div class="alloc-track"><span style="width:${(c.spend/total*100).toFixed(1)}%"></span></div><div class="num">${money(c.spend)}</div><div class="num rev">${money(c.rev)}</div><div class="num roi ${c.roi<18?'warn':'good'}">${c.roi}x</div><div class="num delta ${c.delta>=0?'good':'bad'}">${c.delta>=0?'+':''}${c.delta}%</div></div>`).join('');
+}
+function spendDonut(){ try {
+  if(charts.spendDonut){ charts.spendDonut.destroy(); charts.spendDonut=null; }
+  if(!isOnboarded(currentBusiness)) return;
+  const channels=DATA.byBusiness[currentBusiness].channels;
+  charts.spendDonut=new Chart(document.getElementById('spendDonut'),{type:'doughnut',data:{labels:channels.map(c=>c.name),datasets:[{data:channels.map(c=>c.spend),backgroundColor:['#5b72ff','#5db6ff','#8d73d6','#e0ae47','#2ecb87','#94a0b7'],borderColor:'#181a1e',borderWidth:2}]},options:{plugins:{legend:{display:false}},cutout:'68%',responsive:false,animation:false}});
+} catch(e){ console.error('spendDonut failed:', e); } }
+function renderMoneyTabs(){
+  const tabs=[['all','All pools'],['channel','Channels'],['agency','Agencies & vendors']];
+  document.getElementById('mmTabs').innerHTML=tabs.map(t=>`<button class="mm-tab ${mmFilter===t[0]?'active':''}" onclick="setMoneyFilter('${t[0]}')">${t[1]}</button>`).join('');
+}
+function setMoneyFilter(f){mmFilter=f;renderMoneyTabs();renderMoneyChart()}
+function renderMoneyChart(){ try {
+  const wrap0=document.getElementById('moneyChartWrap');
+  if(!isOnboarded(currentBusiness)){ if(wrap0){ if(charts.moneyChart){charts.moneyChart.destroy();charts.moneyChart=null;} wrap0.style.height='auto'; wrap0.innerHTML=notOnboardedNote('The spend/revenue ledger'); } return; }
+  if(wrap0 && !document.getElementById('moneyChart')){ wrap0.innerHTML='<canvas id="moneyChart"></canvas>'; }
+  const el=document.getElementById('moneyChart');
+  if(!el) return;
+  let rows=DATA.byBusiness[currentBusiness].pools.filter(r=>r.category!=='tool'&&(mmFilter==='all'||r.category===mmFilter));
+  rows=[...rows].sort((a,b)=>(b.rev||0)-(a.rev||0));
+  const wrap=document.getElementById('moneyChartWrap');
+  if(wrap) wrap.style.height=Math.max(220, rows.length*34)+'px';
+  const statusColor=r=>r.status==='good'?'#2ecb87':r.status==='warn'?'#e0ae47':'#ff5f70';
+  if(charts.moneyChart)charts.moneyChart.destroy();
+  const datasets=[
+      {label:'Spend (₹Cr)',data:rows.map(r=>r.spend),backgroundColor:'#5b72ff',borderRadius:3},
+      {label:'Revenue (₹Cr)',data:rows.map(r=>r.rev||0),backgroundColor:rows.map(statusColor),borderRadius:3}
+  ];
+  const xTitle='₹ Cr';
+  charts.moneyChart=new Chart(el,{type:'bar',data:{
+    labels:rows.map(r=>r.name),
+    datasets
+    },options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,position:'top',labels:{color:'#a6b0c3',font:{size:10},boxWidth:10}},
+      tooltip:{callbacks:{afterBody:function(items){
+        const r=rows[items[0].dataIndex];
+        const roi=r.roi?r.roi+'x':'—';
+        const delta=r.delta==null?'—':(r.delta>0?'+':'')+r.delta+'%';
+        const status=r.status==='good'?'Strong':r.status==='warn'?'Watch':'Attention';
+        const fmtPct=n=>n==null?'—':(n>=0?'+':'')+n+'%';
+        const lines=['ROI: '+roi, 'Revenue MoM Δ: '+delta, 'Status: '+status, '',
+          'New customers: '+(r.newCustM!=null?r.newCustM+'M':'—')];
+        if(!ONLINE_ONLY_BIZ.includes(currentBusiness)) lines.push('Store visits growth: '+fmtPct(r.footfallGrowth));
+        else lines.push('Store visits growth: N/A · online-only');
+        if(NO_APP_BIZ.includes(currentBusiness)) lines.push('App installs growth: N/A · no app');
+        else lines.push('App installs growth: '+fmtPct(r.installsGrowth));
+        lines.push('Online acquisition growth: '+fmtPct(r.acqGrowth));
+        return lines;
+      }}}},
+    scales:{x:{ticks:{color:'#a6b0c3',font:{size:9}},grid:{color:'#26282d'},title:{display:true,text:xTitle,color:'#6e7b95',font:{size:9}}},y:{ticks:{color:'#c7d0df',font:{size:10}},grid:{display:false}}}}});
+} catch(e){ console.error('renderMoneyChart failed', e); } }
+function renderMoneySummary(){
+  const t=BU_TOTALS[currentBusiness];
+  document.getElementById('moneyTotalLabel').textContent = (currentBusiness==='All businesses'?'Total marketing outlay':currentBusiness+' marketing outlay')+' · YTD';
+  document.getElementById('moneyTotalSpend').textContent = money(t.spend);
+  document.getElementById('moneyTotalSub').textContent = t.dSpend+' · ₹'+t.rev.toLocaleString('en-IN')+' Cr revenue';
+  document.getElementById('moneyTotalSub').className = 'm '+signTone(t.dSpend);
+  document.getElementById('moneyExecRead').textContent = currentBusiness==='All businesses'
+    ? 'Performance + Brand pools carry 68% of spend and the largest direct-revenue contribution; two agency partners and Paid Social are the efficiency pressure points worth a decision this week.'
+    : currentBusiness==='AJIO'
+      ? 'Search and Performance Marketing are the most efficient pools for AJIO — Interactive Avenues and GroupM carry the bulk of paid execution.'
+      : currentBusiness==='Tira'
+        ? 'Paid Social and Influencer are the pressure points for Tira — Ogilvy and Qyuki-produced creative is due for a refresh before scaling further.'
+        : currentBusiness==='Jiomart'
+          ? 'SEO/GEO and Database/CRM are the most efficient pools for Jiomart — Influencer/Affiliate and Creative & Content are due for a refresh before scaling further.'
+          : 'Performance Marketing and SEO/GEO carry Reliance Trends\' paid execution — Influencer/Affiliate is below the portfolio ROI median and worth a decision this week.';
+}
+
+/* ---------- business pulse dimming + decisions (business-aware) ---------- */
+function renderBusinessPulse(){
+  const panels={AJIO:'ajioPulsePanel',Tira:'tiraPulsePanel',Jiomart:'jiomartPulsePanel','Reliance Trends':'trendsPulsePanel'};
+  Object.keys(panels).forEach(biz=>{
+    const el=document.getElementById(panels[biz]);
+    if(!el) return;
+    el.classList.toggle('dimmed', currentBusiness!=='All businesses' && currentBusiness!==biz);
+    el.classList.toggle('biz-highlight', currentBusiness===biz);
+  });
+}
+function renderDecisions(){
+  document.getElementById('decisionGrid').innerHTML=DATA.decisions.map((d,i)=>{
+    const dim = !bizVisible(d.biz) ? 'dimmed' : '';
+    return `<div class="decision-card ${d.tone} ${dim}"><div class="decision-top"><span class="decision-tag">${d.tag}</span><span class="badge ${d.tone==='redline'?'red':'green'}">CMO action</span></div><div class="decision-title">${d.title}</div><div class="decision-copy">${d.copy}</div><div class="decision-metrics">${d.metrics.map(m=>`<div class="dmetric"><span>${m[0]}</span><b>${m[1]}</b></div>`).join('')}</div><div class="decision-actions"><button class="btn primary" onclick="openDecision(${i})">Review rationale</button><button class="btn" onclick="queueAction('${d.title.replace(/'/g,"\\'")}')">Queue</button></div><div class="tiny-note">Illustrative action based on dummy data · validate against actual measurement and finance methodology.</div></div>`;
+  }).join('');
+}
+function openDecision(i){const d=DATA.decisions[i];openModal(d.title,`<div class="modal-grid">${d.metrics.map(m=>`<div class="modal-box"><span>${m[0]}</span><b>${m[1]}</b></div>`).join('')}</div><div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">${d.copy} The decision layer combines spend trajectory, revenue response, efficiency, budget adherence and specialist-agent signals. In production, this panel would show evidence lineage, approval thresholds and scenario outputs.</div></div><div class="modal-section"><div class="panel-title">Suggested control path</div><div class="modal-copy">1. Review supporting campaign / vendor detail → 2. Validate finance and attribution methodology → 3. Approve or modify the reallocation → 4. Track post-action impact in Action History.</div></div><div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="queueAction('${d.title.replace(/'/g,"\\'")}')">Queue</button><button class="btn" onclick="closeModal()">Not now</button></div>${notifyRowHTML(d.title,'Head of Channel')}`)}
+function queueAction(title){toast('Action queued: '+title);closeModal()}
+
+/* ---------- performance trajectory (business-aware) ---------- */
+function renderCharts(){ try {
+  const m=DATA.byBusiness[currentBusiness].monthly;
+  document.getElementById('perfSub').textContent = currentBusiness==='All businesses' ? 'Monthly run-rate · Portfolio' : 'Monthly run-rate · '+currentBusiness;
+  if(charts.performance)charts.performance.destroy();charts.performance=new Chart(document.getElementById('performanceChart'),{data:{labels:m.labels,datasets:[{type:'line',label:'Revenue (₹Cr)',data:m.revenue,borderColor:'#67a8ff',backgroundColor:'rgba(103,168,255,.08)',yAxisID:'y1',tension:.35,fill:true,pointRadius:2},{type:'bar',label:'Spend (₹Cr)',data:m.spend,backgroundColor:'rgba(98,119,255,.55)',borderRadius:4,yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b98b0',font:{size:9},boxWidth:10}}},scales:{x:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}},y:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}},y1:{position:'right',grid:{display:false},ticks:{color:'#67738b',font:{size:9}}}}}});
+  if(charts.roas)charts.roas.destroy();charts.roas=new Chart(document.getElementById('roasChart'),{type:'line',data:{labels:m.labels,datasets:[{label:'ROI',data:m.roas,borderColor:'#52d98d',backgroundColor:'rgba(82,217,141,.07)',fill:true,tension:.35,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#67738b',font:{size:9}}},y:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}}}}})
+} catch(e){ console.error('renderCharts failed:', e); } }
+
+/* ---------- master refresh for the control page ---------- */
+function refreshControlPage(){
+  renderHero(); renderSubAgents(); renderPriorities(); renderFullFeed();
+  renderAllocation(); spendDonut(); renderMoneyTabs(); renderMoneyChart(); renderMoneySummary(); renderSpendBucket(); spendBucketChart('spendBucketChart'); renderCampaignsTop5(); renderSignalSnapshots();
+  renderBusinessPulse(); renderCategorySection(); renderDecisions(); renderCharts();
+  if(document.getElementById('spendPage').innerHTML) buildPage('spend');
+}
+
+function buildPage(page){
+  const commonHead=(title,sub)=>`<div class="section-head"><div><div class="section-name">${title}</div><div class="section-sub">${sub}</div></div></div>`;
+  if(page==='spend'){
+    if(!isOnboarded(currentBusiness)){
+      document.getElementById('spendPage').innerHTML=commonHead('Spend & ROI cockpit',currentBusiness+' is newly onboarded onto Growth OS')
+        + notOnboardedNote('The full spend/ROI cockpit');
+      return;
+    }
+    const bb=DATA.byBusiness[currentBusiness];
+    const t=BU_TOTALS[currentBusiness];
+    const mainHTML=`<div class="metric-strip" style="margin-bottom:12px"><div class="metric-box"><div class="l">Spend</div><div class="v">${money(t.spend)}</div><div class="m ${t.tone.spend}">${t.dSpend}</div></div><div class="metric-box"><div class="l">Revenue</div><div class="v">₹${t.rev.toLocaleString('en-IN')} Cr</div><div class="m ${t.tone.rev}">${t.dRev}</div></div><div class="metric-box"><div class="l">ROI</div><div class="v">${t.roas}x</div><div class="m ${t.tone.roas}">${t.dRoas}</div></div><div class="metric-box"><div class="l">Budget used</div><div class="v">94%</div><div class="m warn">₹6.2 Cr headroom</div></div><div class="metric-box"><div class="l">Unallocated opportunity</div><div class="v">₹8.4 Cr</div><div class="m good">Across 3 moves</div></div></div>`
+      +sectionHead('Spend bucket mix','Media vs. agency/vendors vs. tools — share of total spend; revenue and ROI shown where directly attributable')+spendBucketHTML(currentBusiness,'spendBucketChartSpend')
+      +sectionHead('Spend by channel','Revenue is shown alongside investment to make economics visible'+(currentBusiness!=='All businesses'?' · filtered to '+currentBusiness:''))+`<div class="detail-grid"><div class="panel table-panel"><table class="table"><thead><tr><th>Channel / pool</th><th>Spend</th><th>Revenue</th><th>ROI</th><th>CAC</th><th>MoM</th><th>Status</th></tr></thead><tbody>${bb.channels.map(r=>`<tr onclick="openChannel('${r.name}')"><td class="name link">${r.name}</td><td>${money(r.spend)}</td><td>${money(r.rev)}</td><td>${r.roi}x</td><td>${r.cac?'₹'+r.cac:'—'}</td><td class="${r.delta>=0?'good':'bad'}">${r.delta>0?'+':''}${r.delta}%</td><td><span class="mini-status ${r.status}">${r.status==='good'?'STRONG':r.status==='warn'?'WATCH':'ATTENTION'}</span></td></tr>`).join('')}</tbody></table></div><div class="panel"><div class="panel-head"><div><div class="panel-title">Budget vs spend</div><div class="panel-sub">Illustrative monthly utilization</div></div></div><div class="signal-list"><div class="signal ${currentBusiness!=='All businesses'&&currentBusiness!=='AJIO'?'dimmed':''}"><span class="dot"></span><div><div class="t">AJIO</div><div class="s">₹82 Cr budget · ₹78 Cr spent</div></div><div class="right warn">95%</div></div><div class="signal ${currentBusiness!=='All businesses'&&currentBusiness!=='Tira'?'dimmed':''}"><span class="dot"></span><div><div class="t">Tira</div><div class="s">₹52 Cr budget · ₹48.4 Cr spent</div></div><div class="right warn">93%</div></div><div class="signal ${currentBusiness!=='All businesses'&&currentBusiness!=='Jiomart'?'dimmed':''}"><span class="dot"></span><div><div class="t">Jiomart</div><div class="s">₹55 Cr budget · ₹52.0 Cr spent</div></div><div class="right warn">95%</div></div><div class="signal ${currentBusiness!=='All businesses'&&currentBusiness!=='Reliance Trends'?'dimmed':''}"><span class="dot"></span><div><div class="t">Reliance Trends</div><div class="s">₹37 Cr budget · ₹34.5 Cr spent</div></div><div class="right warn">93%</div></div><div class="signal signal-click" onclick="openQueueItem(4)"><span class="dot red"></span><div><div class="t">Women's Fashion &amp; Skincare</div><div class="s">Pacing at 106% / 104% of monthly plan — click for the background</div></div><div class="right bad">+₹3.0 Cr</div></div></div></div></div>`
+      +sectionHead('Campaign-level performance','Google Ads and Meta Ads campaigns inside the Performance Marketing pool'+(currentBusiness!=='All businesses'?' · filtered to '+currentBusiness:''))+campaignPlatformsHTML(currentBusiness)
+      +sectionHead('Agencies, vendors & tools','The Control Tower keeps the cost base visible beyond media channels')+`<div class="panel table-panel"><table class="agency-table"><thead><tr><th>Partner</th><th>Type</th><th class="right">Spend</th><th class="right">Revenue</th><th class="right">ROI</th><th class="right">Revenue MoM Δ</th><th>Status</th></tr></thead><tbody>${bb.vendors.map(v=>`<tr><td class="vendor">${v.name}</td><td>${v.type}</td><td class="right">${money(v.spend)}</td><td class="right"${v.category==='tool'?' title="Cost tracked; revenue not directly attributable for tools"':''}>${v.category==='tool'?'—':(v.rev?money(v.rev):'—')}</td><td class="right"${v.category==='tool'?' title="Cost tracked; revenue not directly attributable for tools"':''}>${v.category==='tool'?'—':(v.roi?v.roi+'x':'—')}</td><td class="right ${v.category==='tool'?'':(v.delta==null?'':(v.delta>=0?'good':'bad'))}"${v.category==='tool'?' title="Cost tracked; revenue not directly attributable for tools"':''}>${v.category==='tool'?'—':(v.delta==null?'—':(v.delta>0?'+':'')+v.delta+'%')}</td><td><span class="mini-status ${v.category==='tool'?'na':v.status}" title="${v.category==='tool'?'No revenue/ROI data to base a performance judgment on':''}">${v.category==='tool'?'N/A':(v.status==='good'?'PERFORMING':v.status==='warn'?'REVIEW':'UNDERPERFORMING')}</span></td></tr>`).join('')}</tbody></table><div class="camp-note">Revenue, ROI and Revenue MoM Δ are not shown for Tools & martech partners (SEMrush, CleverTap, Kantar), and Status reads N/A for the same reason — their cost is tracked, but revenue impact isn't directly attributable to a tool the way it is for a media channel or agency, so there's no basis for a performance judgment.</div></div>`;
+    const sideHTML=mediaMixNoteHTML(currentBusiness)+campaignAnomaliesSideHTML();
+    document.getElementById('spendPage').innerHTML=commonHead('Spend & ROI cockpit','Follow every marketing rupee from budget → channel → agency/vendor/tool → revenue outcome'+(currentBusiness!=='All businesses'?' · filtered to '+currentBusiness:''))
+      +`<div class="workspace"><div class="workspace-main">${mainHTML}</div><div class="workspace-side"><div class="side-rail-head"><span>Recommendations</span><span class="live-dot"></span></div>${sideHTML}</div></div>`;
+  }
+  if(page==='growth')document.getElementById('growthPage').innerHTML=commonHead('Growth & Acquisition','CAC, new customer economics, paid vs organic contribution and search visibility')+`<div class="grid-3"><div class="panel"><div class="panel-title">Blended CAC</div><div class="panel-sub">Last 6 months</div><div class="chart-h"><canvas id="growthCac"></canvas></div></div><div class="panel"><div class="panel-title">Acquisition mix</div><div class="panel-sub">Share of new customers</div><div class="signal-list" style="margin-top:12px"><div class="signal"><span class="dot green"></span><div><div class="t">Performance</div><div class="s">Largest paid source</div></div><div class="right">48%</div></div><div class="signal"><span class="dot"></span><div><div class="t">Organic / SEO / GEO</div><div class="s">Highest efficiency</div></div><div class="right good">29%</div></div><div class="signal"><span class="dot"></span><div><div class="t">CRM / referral</div><div class="s">High-repeat cohorts</div></div><div class="right">23%</div></div></div></div><div class="panel"><div class="panel-title">Search intelligence</div><div class="panel-sub">SEO / GEO visibility</div><div class="metric-strip" style="grid-template-columns:1fr 1fr;margin-top:12px"><div class="metric-box"><div class="l">Organic revenue</div><div class="v">₹402 Cr</div><div class="m good">+19%</div></div><div class="metric-box"><div class="l">GEO visibility</div><div class="v">31%</div><div class="m good">+7.2 pp</div></div></div></div></div>`+commonHead('Acquisition intervention queue','Actions the orchestrator can route into media / growth agents')+renderInlineActions(['Reduce paid social on Tira beauty cohorts','Scale search in high-intent AJIO categories','Test CRM reactivation on high-value lapsed customers']);
+  if(page==='creative') buildCreativePage();
+  if(page==='customer')document.getElementById('customerPage').innerHTML=commonHead('Customer & CRM','Cohort economics, repeat behavior and database contribution')+`<div class="metric-strip" style="margin-bottom:12px"><div class="metric-box"><div class="l">Reachable base</div><div class="v">64.2M</div><div class="m">All consented channels</div></div><div class="metric-box"><div class="l">CRM revenue</div><div class="v">₹286 Cr</div><div class="m good">+18.7%</div></div><div class="metric-box"><div class="l">Repeat purchase</div><div class="v">38.4%</div><div class="m good">+2.1 pp</div></div><div class="metric-box"><div class="l">CRM CAC</div><div class="v">₹512</div><div class="m good">-8.7%</div></div><div class="metric-box"><div class="l">LTV/CAC proxy</div><div class="v">8.4x</div><div class="m good">+0.6x</div></div></div><div class="grid-3"><div class="panel"><div class="panel-title">Customer funnel</div><div class="panel-sub">Reachable → engaged → converted → repeat</div><div style="margin-top:12px">${[['Reachable base','64.2M',100],['Engaged','28.1M',82],['Converted','6.4M',48],['Repeat','2.5M',23]].map(x=>`<div class="progress-row"><div class="progress-top"><span>${x[0]}</span><b>${x[1]}</b></div><div class="alloc-track"><span style="display:block;width:${x[2]}%;height:100%;background:#6079ff"></span></div></div>`).join('')}</div></div><div class="panel"><div class="panel-title">CRM channel mix</div><div class="panel-sub">Revenue contribution (via CleverTap)</div><div class="signal-list" style="margin-top:12px">${[['WhatsApp','₹94 Cr','32.9x'],['App push','₹78 Cr','36.4x'],['Email','₹52 Cr','29.1x'],['SMS','₹18 Cr','21.8x']].map(x=>`<div class="signal"><span class="dot green"></span><div><div class="t">${x[0]}</div><div class="s">Revenue</div></div><div class="right">${x[1]}<br><span class="good">${x[2]}</span></div></div>`).join('')}</div></div><div class="panel"><div class="panel-title">Cohort opportunity</div><div class="panel-sub">Where an agent can intervene</div><div class="signal-list" style="margin-top:12px"><div class="signal"><span class="dot green"></span><div><div class="t">High-value lapsed</div><div class="s">14-day winback journey</div></div><div class="right">+₹2.1 Cr</div></div><div class="signal"><span class="dot"></span><div><div class="t">Beauty cross-sell</div><div class="s">Tira skincare → makeup</div></div><div class="right">+₹1.7 Cr</div></div></div></div></div>`+sectionHead('Customer sentiment — by category','Rolled up from SKU-level reviews and social listening to the category altitude a CMO needs — click a row for the background')+renderCategorySentimentTable()+sectionHead('Reverse logistics — by category','Return rate and leading reason code by category, run by its own specialist agent — click a row for the background')+renderCategoryReturnsTable();
+  if(page==='marketintel') buildMarketIntelPage();
+  if(page==='campaigns') buildCampaignDeepDivePage();
+  if(page==='actions')document.getElementById('actionsPage').innerHTML=commonHead('Action Review','Unified approval queue for actions surfaced by the orchestrator and specialist agents')+`<div class="tabs" style="margin-bottom:11px"><button class="tab active">Pending · 6</button><button class="tab">Completed · 1</button><button class="tab">Rejected · 1</button></div><div class="signal-list">${['Shift ₹2.4 Cr from Paid Social → Search','Refresh 18 fatigued creatives across Tira prospecting','Scale CRM high-value cohort journey','Reduce Influencer pool budget by ₹0.6 Cr','Move ₹1.2 Cr from low-ROI content to SEO/GEO','Pause 2 over-budget brand campaigns'].map((x,i)=>`<div class="signal" style="grid-template-columns:1fr auto"><div><div class="t">${x}</div><div class="s">Agent: ${i%2?'Creative Agent':'ROI Analyst'} · Illustrative impact available in rationale</div></div><div class="right"><button class="btn primary" onclick="queueAction('${x.replace(/'/g,"\\'")}')">Approve</button> <button class="btn" onclick="toast('Action snoozed')">Snooze</button></div></div>`).join('')}</div>`;
+  if(page==='history')document.getElementById('historyPage').innerHTML=commonHead('Action History','Previously dispatched interventions and the impact recorded since push')+`<div class="metric-strip" style="margin-bottom:12px"><div class="metric-box"><div class="l">Actions pushed · 7d</div><div class="v">1</div><div class="m">2 reviewed</div></div><div class="metric-box"><div class="l">On-track rate</div><div class="v">82%</div><div class="m good">vs expected impact</div></div><div class="metric-box"><div class="l">Incremental ROI lift</div><div class="v">+0.42x</div><div class="m good">across pushed actions</div></div><div class="metric-box"><div class="l">Daily spend reallocated</div><div class="v">₹12.4L</div><div class="m">absolute / day</div></div><div class="metric-box"><div class="l">Open follow-ups</div><div class="v">3</div><div class="m warn">need review</div></div></div><div class="panel table-panel"><table class="table"><thead><tr><th>Action</th><th>Agent</th><th>Area</th><th>Impact</th><th>Status</th></tr></thead><tbody><tr><td class="name">Add 4 new RSA headlines to Brand Search</td><td>Creative Agent</td><td>AJIO Search</td><td class="good">Improves learning</td><td><span class="mini-status good">APPROVED</span></td></tr><tr><td class="name">Enable new CRM winback journey</td><td>Customer Agent</td><td>Tira CRM</td><td class="good">Est. +0.6x ROI</td><td><span class="mini-status good">APPROVED</span></td></tr><tr><td class="name">Increase Paid Social prospecting</td><td>ROI Analyst</td><td>Tira</td><td class="bad">ROI deteriorated</td><td><span class="mini-status bad">REJECTED</span></td></tr></tbody></table></div>`;
+}
+function renderInlineActions(arr){return `<div class="decision-grid">${arr.map((x,i)=>`<div class="decision-card"><span class="decision-tag">Agent action</span><div class="decision-title">${x}</div><div class="decision-copy">Illustrative action path with supporting metrics and approval gate.</div><div class="decision-actions"><button class="btn primary" onclick="openAgentPanel('${x.replace(/'/g,"\\'")}')">Ask agent</button><button class="btn" onclick="toast('Queued for Action Review')">Queue</button></div></div>`).join('')}</div>`}
+function renderGrowthCharts(){ try {const c=document.getElementById('growthCac');if(!c)return;if(charts.growthCac)charts.growthCac.destroy();charts.growthCac=new Chart(c,{type:'line',data:{labels:['Apr','May','Jun','Jul','Aug','Sep'],datasets:[{label:'CAC',data:[782,770,758,746,751,742],borderColor:'#5f78ff',backgroundColor:'rgba(95,120,255,.08)',fill:true,tension:.35,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#67738b',font:{size:9}}},y:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}}}}})} catch(e){ console.error('renderGrowthCharts failed:', e); } }
+function sectionHead(title,sub){ return `<div class="section-head"><div><div class="section-name">${title}</div><div class="section-sub">${sub}</div></div></div>`; }
+/* ================================================================
+   Competitor Intelligence: sentiment, reverse logistics, festive
+   campaign calendar (MoM) and competitor tracking. Each domain is
+   run by its own specialist agent (see DATA.subAgents) and gets a
+   compact action-pointer card on the CMO Command Center plus a full
+   breakdown on the Competitor Intelligence page.
+   ================================================================ */
+const SENTIMENT_SKUS=[
+  {sku:"Fila Disruptor II Sneakers",biz:'AJIO',score:4.3,reviews:1240,positive:82,trend:3,theme:'Sizing runs slightly large — a size-down callout on the listing could reduce this',tag:'good'},
+  {sku:"Flying Machine Slim Fit Stretch Jeans",biz:'AJIO',score:4.1,reviews:860,positive:76,trend:1,theme:'Fabric feels stiff on first wear, softens after 2-3 washes — a known first-wear complaint',tag:'good'},
+  {sku:"Being Human Graphic Print T-Shirt",biz:'AJIO',score:3.6,reviews:540,positive:61,trend:-8,theme:'Colour fading after 3-4 washes — quality complaints are rising, not seasonal noise',tag:'bad'},
+  {sku:"Kiehl's Ultra Facial Cream",biz:'Tira',score:4.6,reviews:2100,positive:91,trend:4,theme:'Praised for lightweight hydration — a consistent repeat-purchase driver',tag:'good'},
+  {sku:"Charlotte Tilbury Pillow Talk Lipstick",biz:'Tira',score:4.5,reviews:1580,positive:89,trend:2,theme:'Shade and packaging praised; occasional stock-out complaints during peak demand',tag:'good'}
+];
+const RETURNS_SKUS=[
+  {sku:"Fila Disruptor II Sneakers",biz:'AJIO',rate:9,reason:'Size/fit mismatch vs. size chart',trend:1.2,tag:'warn'},
+  {sku:"Flying Machine Slim Fit Stretch Jeans",biz:'AJIO',rate:14,reason:'Waist sizing inconsistent vs. size chart',trend:2.1,tag:'bad'},
+  {sku:"Being Human Graphic Print T-Shirt",biz:'AJIO',rate:11,reason:'Colour/quality perception after first wash',trend:0.5,tag:'warn'},
+  {sku:"Kiehl's Ultra Facial Cream",biz:'Tira',rate:3,reason:'Damaged in transit (packaging)',trend:-0.4,tag:'good'},
+  {sku:"Charlotte Tilbury Pillow Talk Lipstick",biz:'Tira',rate:5,reason:'Shade mismatch vs. online swatch',trend:0.3,tag:'good'}
+];
+const CAMPAIGNS_TOP5=[
+  {id:0,name:'YOU. MORE THAN ANYTHING.',biz:'Tira',type:'Brand campaign',agency:'22feet Tribal',talent:'Kareena Kapoor Khan, Suhana Khan',launched:'Aug 2026',spend:8.5,rev:168.3,views:'42M',footfall:18,installs:24,acquisition:15,roi:19.8,note:"Tira's biggest brand push of the year — a multi-city activation anchored by a celebrity-led film. Footfall and install lift both cleared target within 3 weeks of launch."},
+  {id:1,name:'Big Bold Sale — AJIO Rush',biz:'AJIO',type:'Sale / performance campaign',agency:'Interactive Avenues',talent:'Ahaan Panday',launched:'Aug 2026',spend:6.2,rev:146.3,views:'35M',footfall:null,installs:19,acquisition:21,roi:23.6,note:'AJIO\'s flagship seasonal sale — Search + PMax carried most of the incremental revenue. Highest online acquisition lift of any campaign in the portfolio this quarter.'},
+  {id:2,name:'Rakhi Recovery Abhiyaan',biz:'AJIO',type:'Occasion / gifting campaign',agency:'Manifest',talent:'Jaaved Jaaferi',launched:'Aug 2026',spend:1.8,rev:32.6,views:'28M',footfall:null,installs:12,acquisition:8,roi:18.1,note:'Lowest-spend campaign in the top set, but efficient reach — gifting bundles pairing AJIO fashion with Tira beauty outperformed single-category creatives.'},
+  {id:3,name:'Fenty Beauty Ki Haveli',biz:'Tira',type:'Retail activation / launch',agency:'Sheeko',talent:'Shefali Shah, Ankush Bahuguna',launched:'Jul 2026',spend:3.4,rev:86.4,views:'15M',footfall:31,installs:14,acquisition:17,roi:25.4,note:'Immersive retail activation for the Fenty Beauty relaunch — highest footfall lift of any Tira campaign this year, concentrated in metro flagship stores.'},
+  {id:4,name:'Father Figures',biz:'AJIO',type:'Brand campaign',agency:'22feet Tribal',talent:'Ayush Mehra, Niti Taylor',launched:'Aug 2026',spend:2.6,rev:43.9,views:'19M',footfall:null,installs:8,acquisition:6,roi:16.9,note:"Father's Day brand film — modest reach and lift relative to the sale-driven campaigns, but a strong sentiment and share-of-voice pickup among the target cohort."},
+  {id:5,name:'Roz Ka Saman, Rozana Bachat',biz:'Jiomart',type:'Value / everyday-savings campaign',agency:'GroupM',talent:'Regional creator cohort',launched:'Aug 2026',spend:4.8,rev:132.5,views:'26M',footfall:null,installs:22,acquisition:19,roi:27.6,note:"Jiomart's everyday-value push emphasizing daily essentials pricing — app installs and quick-delivery adoption both accelerated post-launch."},
+  {id:6,name:'Trends Fashion Utsav',biz:'Reliance Trends',type:'Seasonal retail activation',agency:'Ogilvy',talent:'Regional styling influencers',launched:'Aug 2026',spend:3.1,rev:60.1,views:'12M',footfall:22,installs:null,acquisition:11,roi:19.4,note:'Store-led seasonal fashion activation across Reliance Trends outlets — footfall lift concentrated in tier-2 city stores during the seasonal changeover. Reliance Trends has no dedicated app, so acquisition here reflects website + in-store loyalty sign-ups only.'},
+  {id:7,name:'Digital Dukaan Diwali Dhamaka',biz:'Jiomart',type:'Sale / performance campaign',agency:'Interactive Avenues',talent:'Regional creator cohort',launched:'Sep 2026',spend:3.6,rev:97.2,views:'19M',footfall:null,installs:16,acquisition:14,roi:27.0,note:"Jiomart's Diwali merchant-led sale — SEO/GEO and Database/CRM pools carried incremental orders from existing loyalty cohorts ahead of the festive peak."},
+  {id:8,name:'Diwali Wardrobe Refresh',biz:'Reliance Trends',type:'Seasonal retail activation',agency:'Interactive Avenues',talent:'Regional styling influencers',launched:'Sep 2026',spend:2.4,rev:41.6,views:'9M',footfall:16,installs:null,acquisition:9,roi:17.3,note:'Diwali-led in-store styling activation across Reliance Trends outlets — footfall lift concentrated in North and West India stores.'}
+];
+const CAMPAIGN_BRAND_KPIS={
+  0:{awarenessLift:14,adRecall:38,shareOfVoice:22,sentimentScore:88},
+  1:{awarenessLift:6,adRecall:22,shareOfVoice:15,sentimentScore:79},
+  2:{awarenessLift:4,adRecall:18,shareOfVoice:10,sentimentScore:81},
+  3:{awarenessLift:11,adRecall:33,shareOfVoice:16,sentimentScore:85},
+  4:{awarenessLift:8,adRecall:27,shareOfVoice:13,sentimentScore:83},
+  5:{awarenessLift:9,adRecall:31,shareOfVoice:19,sentimentScore:76},
+  6:{awarenessLift:7,adRecall:29,shareOfVoice:17,sentimentScore:74},
+  7:{awarenessLift:5,adRecall:24,shareOfVoice:14,sentimentScore:78},
+  8:{awarenessLift:6,adRecall:26,shareOfVoice:15,sentimentScore:80}
+};
+const CAMPAIGN_CREATIVE_MIX={
+  0:[{format:'Video (Hero film)',shareOfSpend:55,ctr:2.1,completion:64},{format:'Static / Carousel',shareOfSpend:25,ctr:1.3,completion:null},{format:'UGC / Influencer',shareOfSpend:20,ctr:3.4,completion:51}],
+  1:[{format:'Static / Carousel (Sale creatives)',shareOfSpend:45,ctr:2.8,completion:null},{format:'Video (Search / PMax)',shareOfSpend:35,ctr:1.9,completion:58},{format:'UGC / Influencer',shareOfSpend:20,ctr:2.4,completion:46}],
+  2:[{format:'Static / Carousel',shareOfSpend:50,ctr:1.6,completion:null},{format:'Video',shareOfSpend:30,ctr:1.2,completion:41},{format:'UGC / Influencer',shareOfSpend:20,ctr:2.1,completion:39}],
+  3:[{format:'Video (Retail activation film)',shareOfSpend:40,ctr:2.5,completion:61},{format:'Static / Carousel',shareOfSpend:30,ctr:1.5,completion:null},{format:'UGC / Influencer',shareOfSpend:30,ctr:3.1,completion:54}],
+  4:[{format:'Video (Brand film)',shareOfSpend:60,ctr:1.7,completion:57},{format:'Static / Carousel',shareOfSpend:25,ctr:1.1,completion:null},{format:'UGC / Influencer',shareOfSpend:15,ctr:2.0,completion:44}],
+  5:[{format:'Video (App-led explainer)',shareOfSpend:45,ctr:2.9,completion:55},{format:'Static / Carousel (Price-led)',shareOfSpend:35,ctr:3.2,completion:null},{format:'UGC / Influencer',shareOfSpend:20,ctr:2.6,completion:48}],
+  6:[{format:'Video (In-store activation film)',shareOfSpend:50,ctr:1.9,completion:53},{format:'Static / Carousel',shareOfSpend:30,ctr:1.4,completion:null},{format:'UGC / Influencer',shareOfSpend:20,ctr:2.3,completion:45}],
+  7:[{format:'Static / Carousel (Price-led)',shareOfSpend:50,ctr:3.0,completion:null},{format:'Video (App-led explainer)',shareOfSpend:30,ctr:2.4,completion:50},{format:'UGC / Influencer',shareOfSpend:20,ctr:2.2,completion:42}],
+  8:[{format:'Video (In-store activation film)',shareOfSpend:45,ctr:1.8,completion:49},{format:'Static / Carousel',shareOfSpend:35,ctr:1.3,completion:null},{format:'UGC / Influencer',shareOfSpend:20,ctr:2.0,completion:40}]
+};
+const COMPETITOR_INTEL=[
+  {category:'Beauty',us:'Tira',competitor:'Nykaa',metrics:[
+    {label:'Stock availability',us:91,comp:95,unit:'%',better:'higher'},
+    {label:'Discounting (avg. discount depth)',us:18,comp:22,unit:'%',better:'higher'},
+    {label:'Share of voice (SoV)',us:34,comp:41,unit:'%',better:'higher'},
+    {label:'Avg. customer rating',us:4.4,comp:4.3,unit:'',better:'higher'},
+    {label:'Avg. delivery time',us:36,comp:20,unit:' hrs',better:'lower'},
+    {label:'Reviews sentiment (% positive)',us:86,comp:82,unit:'%',better:'higher'}
+  ]},
+  {category:'Menswear',us:'AJIO',competitor:'Myntra',metrics:[
+    {label:'Stock availability',us:87,comp:93,unit:'%',better:'higher'},
+    {label:'Discounting (avg. discount depth)',us:32,comp:28,unit:'%',better:'higher'},
+    {label:'Share of voice (SoV)',us:29,comp:46,unit:'%',better:'higher'},
+    {label:'Avg. customer rating',us:4.1,comp:4.2,unit:'',better:'higher'},
+    {label:'Avg. delivery time',us:60,comp:36,unit:' hrs',better:'lower'},
+    {label:'Reviews sentiment (% positive)',us:77,comp:80,unit:'%',better:'higher'}
+  ]},
+  {category:'Grocery & Quick-commerce',us:'Jiomart',competitor:'BigBasket',metrics:[
+    {label:'Stock availability',us:89,comp:92,unit:'%',better:'higher'},
+    {label:'Discounting (avg. discount depth)',us:14,comp:11,unit:'%',better:'higher'},
+    {label:'Share of voice (SoV)',us:31,comp:36,unit:'%',better:'higher'},
+    {label:'Avg. customer rating',us:4.2,comp:4.3,unit:'',better:'higher'},
+    {label:'Avg. delivery time',us:18,comp:22,unit:' mins',better:'lower'},
+    {label:'Reviews sentiment (% positive)',us:79,comp:81,unit:'%',better:'higher'}
+  ]},
+  {category:'Value Fashion Retail',us:'Reliance Trends',competitor:'Zudio',metrics:[
+    {label:'Stock availability',us:90,comp:88,unit:'%',better:'higher'},
+    {label:'Discounting (avg. discount depth)',us:24,comp:20,unit:'%',better:'higher'},
+    {label:'Share of voice (SoV)',us:27,comp:33,unit:'%',better:'higher'},
+    {label:'Avg. customer rating',us:4.0,comp:4.1,unit:'',better:'higher'},
+    {label:'Avg. delivery time',us:48,comp:52,unit:' hrs',better:'lower'},
+    {label:'Reviews sentiment (% positive)',us:75,comp:73,unit:'%',better:'higher'}
+  ]}
+];
+function sentimentRowHTML(s){
+  return `<tr onclick="openSentimentInsight('${s.sku.replace(/'/g,"\\'")}')"><td class="name link">${s.sku} <span class="biz-tag">${s.biz}</span></td><td>${s.score}/5</td><td>${s.reviews.toLocaleString('en-IN')}</td><td class="${s.tag==='bad'?'bad':'good'}">${s.positive}%</td><td class="${s.trend>=0?'good':'bad'}">${s.trend>=0?'+':''}${s.trend}%</td></tr>`;
+}
+function renderSentimentTable(){
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Customer sentiment — tracked SKUs</div><div class="panel-sub">Sourced from product reviews &amp; social listening (demo scope: 5 SKUs) · click a row for the background</div></div></div><table class="table"><thead><tr><th>SKU</th><th>Rating</th><th>Reviews</th><th>% positive</th><th>Trend</th></tr></thead><tbody>${SENTIMENT_SKUS.map(sentimentRowHTML).join('')}</tbody></table></div>`;
+}
+function openSentimentInsight(sku){
+  const s=SENTIMENT_SKUS.find(x=>x.sku===sku);
+  if(!s) return;
+  const steps = s.tag==='bad'
+    ? ['Loop in the QC/vendor team on the recurring complaint theme above','Update the listing page (size guide, material or wash-care description) if the theme is expectation-related','Re-check sentiment after the next 2 weeks of reviews']
+    : ['Monitor — no action needed while sentiment holds','Consider featuring this SKU in creative given its rating and review volume'];
+  openModal(s.sku, `
+    <div class="modal-grid"><div class="modal-box"><span>Business</span><b>${s.biz}</b></div><div class="modal-box"><span>Rating</span><b>${s.score}/5</b></div><div class="modal-box"><span>Reviews</span><b>${s.reviews.toLocaleString('en-IN')}</b></div><div class="modal-box"><span>% positive</span><b>${s.positive}%</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${s.theme}. Positive sentiment is ${s.trend>=0?'up':'down'} ${Math.abs(s.trend)}% over the last reporting cycle.</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">Sentiment Agent tracks rating, review volume and the leading complaint/praise theme per SKU across marketplace reviews and social listening, and flags any SKU whose trend moves more than 5% in either direction.</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${steps.map((st,i)=>(i+1)+'. '+st).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('marketintel')">Open Competitor Intelligence →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(s.sku+' — customer sentiment','Head of Customer Experience')}
+  `);
+}
+function returnsRowHTML(r){
+  return `<tr onclick="openReturnsInsight('${r.sku.replace(/'/g,"\\'")}')"><td class="name link">${r.sku} <span class="biz-tag">${r.biz}</span></td><td class="${r.tag==='bad'?'bad':r.tag==='warn'?'warn':'good'}">${r.rate}%</td><td>${r.reason}</td><td class="${r.trend>=0?'good':'bad'}">${r.trend>=0?'+':''}${r.trend}pp</td></tr>`;
+}
+function renderReturnsTable(){
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Reverse logistics — tracked SKUs</div><div class="panel-sub">Same 5 SKUs, tracked for return rate and reason code · click a row for the background</div></div></div><table class="table"><thead><tr><th>SKU</th><th>Return rate</th><th>Top reason</th><th>MoM</th></tr></thead><tbody>${RETURNS_SKUS.map(returnsRowHTML).join('')}</tbody></table></div>`;
+}
+function openReturnsInsight(sku){
+  const r=RETURNS_SKUS.find(x=>x.sku===sku);
+  if(!r) return;
+  openModal(r.sku+' — return rate '+r.rate+'%', `
+    <div class="modal-grid"><div class="modal-box"><span>Business</span><b>${r.biz}</b></div><div class="modal-box"><span>Return rate</span><b>${r.rate}%</b></div><div class="modal-box"><span>MoM</span><b>${r.trend>=0?'+':''}${r.trend}pp</b></div><div class="modal-box"><span>Top reason</span><b>${r.reason}</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${r.reason} is the leading return reason for this SKU, and the rate has moved ${r.trend>=0?'up':'down'} ${Math.abs(r.trend)} percentage points month-on-month.</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">Logistics Agent tracks return rate and reason code per SKU, and flags any SKU whose return rate moves more than 1 percentage point month-on-month or whose absolute rate sits above the category median.</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${['Share the reason-code breakdown with the category/QC team','If size/fit related, review or correct the size chart and listing imagery','Re-check the return rate after the next 4 weeks of orders'].map((s,i)=>(i+1)+'. '+s).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('marketintel')">Open Competitor Intelligence →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(r.sku+' — return rate','Head of Supply Chain')}
+  `);
+}
+function categorySentimentRowHTML(s){
+  return `<tr onclick="openCategorySentimentInsight('${s.category.replace(/'/g,"\\'")}')"><td class="name link">${s.category} <span class="biz-tag">${s.biz}</span></td><td>${s.score}/5</td><td>${s.reviews.toLocaleString('en-IN')}</td><td class="${s.trend<0?'bad':'good'}">${s.positive}%</td><td class="${s.trend>=0?'good':'bad'}">${s.trend>=0?'+':''}${s.trend}%</td></tr>`;
+}
+function renderCategorySentimentTable(){
+  const rows=CATEGORY_SENTIMENT.filter(s=>bizVisible(s.biz));
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Customer sentiment — by category</div><div class="panel-sub">Aggregated from product reviews &amp; social listening across all 12 categories in the portfolio · click a row for the background</div></div></div><table class="table"><thead><tr><th>Category</th><th>Rating</th><th>Reviews</th><th>% positive</th><th>Trend</th></tr></thead><tbody>${rows.map(categorySentimentRowHTML).join('')}</tbody></table></div>`;
+}
+function openCategorySentimentInsight(category){
+  const s=CATEGORY_SENTIMENT.find(x=>x.category===category);
+  if(!s) return;
+  const steps = s.trend<0
+    ? ['Loop in the category/QC team on the recurring complaint theme above','Update listing pages (size guide, material or efficacy claims) if the theme is expectation-related','Re-check sentiment after the next reporting cycle']
+    : ['Monitor — no action needed while sentiment holds','Consider featuring this category in upcoming creative given its rating and trend'];
+  openModal(s.category+' — customer sentiment', `
+    <div class="modal-grid"><div class="modal-box"><span>Business</span><b>${s.biz}</b></div><div class="modal-box"><span>Rating</span><b>${s.score}/5</b></div><div class="modal-box"><span>Reviews</span><b>${s.reviews.toLocaleString('en-IN')}</b></div><div class="modal-box"><span>% positive</span><b>${s.positive}%</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${s.theme} Positive sentiment is ${s.trend>=0?'up':'down'} ${Math.abs(s.trend)}% over the last reporting cycle.</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">Sentiment Agent rolls up rating, review volume and the leading complaint/praise theme to the category level — the right altitude for a CMO — and flags any category whose trend moves more than 5% in either direction.</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${steps.map((st,i)=>(i+1)+'. '+st).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('customer')">Open Customer &amp; CRM →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(s.category+' — customer sentiment','Head of Customer Experience')}
+  `);
+}
+function categoryReturnsRowHTML(r){
+  return `<tr onclick="openCategoryReturnsInsight('${r.category.replace(/'/g,"\\'")}')"><td class="name link">${r.category} <span class="biz-tag">${r.biz}</span></td><td class="${r.rate>=12?'bad':r.rate>=8?'warn':'good'}">${r.rate}%</td><td>${r.reason}</td><td class="${r.trend>=0?'bad':'good'}">${r.trend>=0?'+':''}${r.trend}pp</td></tr>`;
+}
+function renderCategoryReturnsTable(){
+  const rows=CATEGORY_RETURNS.filter(r=>bizVisible(r.biz));
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Reverse logistics — by category</div><div class="panel-sub">Return rate and leading reason code across all 12 categories in the portfolio · click a row for the background</div></div></div><table class="table"><thead><tr><th>Category</th><th>Return rate</th><th>Top reason</th><th>MoM</th></tr></thead><tbody>${rows.map(categoryReturnsRowHTML).join('')}</tbody></table></div>`;
+}
+function openCategoryReturnsInsight(category){
+  const r=CATEGORY_RETURNS.find(x=>x.category===category);
+  if(!r) return;
+  openModal(r.category+' — return rate '+r.rate+'%', `
+    <div class="modal-grid"><div class="modal-box"><span>Business</span><b>${r.biz}</b></div><div class="modal-box"><span>Return rate</span><b>${r.rate}%</b></div><div class="modal-box"><span>MoM</span><b>${r.trend>=0?'+':''}${r.trend}pp</b></div><div class="modal-box"><span>Top reason</span><b>${r.reason}</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${r.reason} is the leading return reason in this category, and the rate has moved ${r.trend>=0?'up':'down'} ${Math.abs(r.trend)} percentage points month-on-month.</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">Logistics Agent rolls up return rate and reason code to the category level and flags any category whose return rate moves more than 1 percentage point month-on-month or whose absolute rate sits above the portfolio median.</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${['Share the reason-code breakdown with the category/QC team','If size/fit related, review or correct the size chart and listing imagery','Re-check the return rate after the next 4 weeks of orders'].map((st,i)=>(i+1)+'. '+st).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('customer')">Open Customer &amp; CRM →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(r.category+' — return rate','Head of Supply Chain')}
+  `);
+}
+function campaignDeepDiveRowHTML(c){
+  const lift = c.footfall!=null ? c.footfall : c.acquisition;
+  const liftLabel = c.footfall!=null ? '' : ' (online)';
+  return `<tr onclick="openCampaignTop5(${c.id})"><td class="name link">${c.name} <span class="biz-tag">${c.biz}</span></td><td>${c.type}</td><td>${c.launched}</td><td>${money(c.spend)}</td><td>${c.views}</td><td>${c.roi}x</td><td class="${lift>=0?'good':'bad'}">${lift>=0?'+':''}${lift}%${liftLabel}</td></tr>`;
+}
+function renderCampaignDeepDiveTable(){
+  const rows=CAMPAIGNS_TOP5.filter(c=>bizVisible(c.biz));
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Campaign deep-dive — top 9 campaigns</div><div class="panel-sub">The same 9 campaigns surfaced on the CMO Command Center · click a row for the full read (spend, reach, agency, talent and lift)</div></div></div><table class="table"><thead><tr><th>Campaign</th><th>Type</th><th>Launched</th><th>Spend</th><th>Views</th><th>ROI</th><th>Footfall / Acq. lift</th></tr></thead><tbody>${rows.map(campaignDeepDiveRowHTML).join('')}</tbody></table></div>`;
+}
+function competitorMetricRowHTML(m){
+  let usAhead=null;
+  if(typeof m.us==='number' && typeof m.comp==='number' && m.better){ usAhead = m.better==='higher' ? m.us>=m.comp : m.us<=m.comp; }
+  const p = m.prefix||'';
+  return `<tr><td class="name">${m.label}</td><td>${p}${typeof m.us==='number'?m.us.toLocaleString('en-IN'):m.us}${m.unit}</td><td>${p}${typeof m.comp==='number'?m.comp.toLocaleString('en-IN'):m.comp}${m.unit}</td><td>${usAhead===null?'<span style="color:var(--muted)">—</span>':(usAhead?'<span class="good">Ahead</span>':'<span class="bad">Behind</span>')}</td></tr>`;
+}
+function renderCompetitorSection(){
+  return '<div class="callout-info">⚠ Illustrative data. In production this section is populated via API integration with a competitive-intelligence data provider (pricing, promotion, assortment and share-of-search feeds), refreshed on a regular cadence — not manually entered.</div>'
+    + COMPETITOR_INTEL.map(cat=>`<div class="panel table-panel" style="margin-bottom:12px"><div class="panel-head"><div><div class="panel-title">${cat.category} — ${cat.us} vs. ${cat.competitor}</div><div class="panel-sub">Click "Ask agent" for the full read</div></div><button class="btn" onclick="openCompetitorDetail('${cat.category}')">Ask agent →</button></div><table class="table"><thead><tr><th>Metric</th><th>${cat.us}</th><th>${cat.competitor}</th><th>Position</th></tr></thead><tbody>${cat.metrics.map(competitorMetricRowHTML).join('')}</tbody></table></div>`).join('');
+}
+function openCompetitorDetail(category){
+  const cat=COMPETITOR_INTEL.find(x=>x.category===category);
+  if(!cat) return;
+  const behind=cat.metrics.filter(m=>{ if(typeof m.us!=='number'||typeof m.comp!=='number'||!m.better) return false; return m.better==='higher'? m.us<m.comp : m.us>m.comp; });
+  openModal(`${cat.category}: ${cat.us} vs. ${cat.competitor}`, `
+    <div class="modal-copy" style="margin-top:0">Competitor Intel Agent benchmarks ${cat.us} against ${cat.competitor} on stock availability, discounting, share of voice, customer ratings, delivery time and reviews sentiment for ${cat.category}.</div>
+    <div class="modal-section"><div class="panel-title">Where we're behind</div><div class="modal-copy">${behind.length? behind.map(m=>`${m.label}: ${cat.us} ${m.prefix||''}${typeof m.us==='number'?m.us.toLocaleString('en-IN'):m.us}${m.unit} vs. ${cat.competitor} ${m.prefix||''}${typeof m.comp==='number'?m.comp.toLocaleString('en-IN'):m.comp}${m.unit}`).join('<br>') : 'No metric currently behind the benchmark.'}</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${['Prioritise a response on the metric with the widest gap first','Loop in category and pricing teams before any price or discount change','Recheck this benchmark on the next data refresh'].map((s,i)=>(i+1)+'. '+s).join('<br>')}</div></div>
+    <div class="modal-section" style="border-top:1px dashed #3a3d44"><div class="panel-title" style="color:#8a97b1">Data source</div><div class="modal-copy">Figures shown are illustrative placeholders. In production this section is populated via API integration with a competitive-intelligence data provider, refreshed on a regular cadence.</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn" onclick="closeModal()">Close</button></div>
+    ${notifyRowHTML(cat.category+' competitive position vs '+cat.competitor,'Head of Competitive Strategy')}
+  `);
+}
+function renderSignalSnapshots(){ try {
+  const sent=CATEGORY_SENTIMENT.filter(s=>bizVisible(s.biz));
+  const ret=CATEGORY_RETURNS.filter(r=>bizVisible(r.biz));
+  if(!sent.length || !ret.length) return;
+  const totalReviews=sent.reduce((a,s)=>a+s.reviews,0)||1;
+  const overallPositive=Math.round(sent.reduce((a,s)=>a+s.positive*s.reviews,0)/totalReviews);
+  const worstSent=[...sent].sort((a,b)=>a.trend-b.trend)[0];
+  const sentHead=document.getElementById('sentimentHeadline'), sentSub=document.getElementById('sentimentSub'), sentBadge=document.getElementById('sentimentBadge');
+  if(sentHead) sentHead.textContent=overallPositive+'% positive';
+  if(sentSub) sentSub.textContent=worstSent.category+' · '+(worstSent.trend>=0?'+':'')+worstSent.trend+'% trend';
+  if(sentBadge){ sentBadge.className='badge'+(worstSent.trend<0?' red':''); sentBadge.textContent=worstSent.trend<0?'Action':'Info'; }
+  const avgRate=Math.round(ret.reduce((a,r)=>a+r.rate,0)/ret.length);
+  const worstRet=[...ret].sort((a,b)=>b.rate-a.rate)[0];
+  const retHead=document.getElementById('returnsHeadline'), retSub=document.getElementById('returnsSub'), retBadge=document.getElementById('returnsBadge');
+  if(retHead) retHead.textContent=avgRate+'% returns';
+  if(retSub) retSub.textContent=worstRet.category+' · '+(worstRet.trend>=0?'+':'')+worstRet.trend+'pp MoM';
+  if(retBadge){ retBadge.className='badge'+(worstRet.trend>0?' red':''); retBadge.textContent=worstRet.trend>0?'Action':'Info'; }
+  const camps=CAMPAIGNS_TOP5.filter(c=>bizVisible(c.biz));
+  if(camps.length){
+    const best=[...camps].sort((a,b)=>b.roi-a.roi)[0];
+    const bcHead=document.getElementById('bestCampaignHeadline'), bcSub=document.getElementById('bestCampaignSub');
+    if(bcHead) bcHead.textContent=best.roi+'x';
+    if(bcSub) bcSub.textContent=best.name+' · highest ROI of the top campaigns';
+  }
+} catch(e){ console.error('renderSignalSnapshots failed', e); } }
+function openSentimentSummary(){
+  const sent=CATEGORY_SENTIMENT.filter(s=>bizVisible(s.biz));
+  const worst=[...sent].sort((a,b)=>a.trend-b.trend)[0];
+  const totalReviews=sent.reduce((a,s)=>a+s.reviews,0)||1;
+  const overallPositive=Math.round(sent.reduce((a,s)=>a+s.positive*s.reviews,0)/totalReviews);
+  openModal('Customer sentiment — action pointer', `
+    <div class="modal-copy" style="margin-top:0">Sentiment Agent rolls up product reviews and social listening to the category level across the portfolio. Overall sentiment is ${overallPositive}% positive. The category needing attention right now:</div>
+    <div class="modal-grid"><div class="modal-box"><span>Category</span><b>${worst.category}</b></div><div class="modal-box"><span>Business</span><b>${worst.biz}</b></div><div class="modal-box"><span>% positive</span><b>${worst.positive}%</b></div><div class="modal-box"><span>Trend</span><b class="${worst.trend<0?'bad':'good'}">${worst.trend>=0?'+':''}${worst.trend}%</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${worst.theme}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('customer')">Open Customer &amp; CRM →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(worst.category+' — customer sentiment','Head of Customer Experience')}
+  `);
+}
+function openReturnsSummary(){
+  const ret=CATEGORY_RETURNS.filter(r=>bizVisible(r.biz));
+  const worst=[...ret].sort((a,b)=>b.rate-a.rate)[0];
+  const avgRate=Math.round(ret.reduce((a,r)=>a+r.rate,0)/ret.length);
+  openModal('Reverse logistics — action pointer', `
+    <div class="modal-copy" style="margin-top:0">Logistics Agent rolls up return rate and reason code to the category level across the portfolio. Portfolio average is ${avgRate}%. The category needing attention right now:</div>
+    <div class="modal-grid"><div class="modal-box"><span>Category</span><b>${worst.category}</b></div><div class="modal-box"><span>Business</span><b>${worst.biz}</b></div><div class="modal-box"><span>Return rate</span><b class="${worst.rate>=12?'bad':'warn'}">${worst.rate}%</b></div><div class="modal-box"><span>MoM</span><b class="${worst.trend>0?'bad':'good'}">${worst.trend>=0?'+':''}${worst.trend}pp</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">Top reason: ${worst.reason}.</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('customer')">Open Customer &amp; CRM →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(worst.category+' — return rate','Head of Supply Chain')}
+  `);
+}
+function openCampaignSummary(){
+  const items=CAMPAIGNS_TOP5.filter(c=>bizVisible(c.biz));
+  if(!items.length) return;
+  const best=[...items].sort((a,b)=>b.roi-a.roi)[0];
+  openCampaignTop5(best.id);
+}
+function openCompetitorSummary(){
+  openModal('Competitive position — action pointer', `
+    <div class="modal-copy" style="margin-top:0">Competitor Intel Agent benchmarks AJIO vs. Myntra (Menswear) and Tira vs. Nykaa (Beauty). The widest gap right now:</div>
+    <div class="modal-grid"><div class="modal-box"><span>Category</span><b>Menswear</b></div><div class="modal-box"><span>Metric</span><b>Share of search</b></div><div class="modal-box"><span>AJIO</span><b>29%</b></div><div class="modal-box"><span>Myntra</span><b class="bad">46%</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">AJIO trails Myntra by 17pp in Menswear share of search while running a deeper average discount (32% vs. 28%) — the gap looks more like an assortment/visibility issue than a pricing one.</div></div>
+    <div class="modal-section" style="border-top:1px dashed #3a3d44"><div class="panel-title" style="color:#8a97b1">Data source</div><div class="modal-copy">Illustrative for this prototype — in production, sourced via API integration with a competitive-intelligence data provider.</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('marketintel')">Open Competitor Intelligence →</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML('Menswear competitive position vs Myntra','Head of Competitive Strategy')}
+  `);
+}
+function buildMarketIntelPage(){
+  const html = sectionHead('Competitor Intelligence','Beauty (Tira vs. Nykaa), Menswear (AJIO vs. Myntra), Grocery (Jiomart vs. BigBasket) and Value Fashion (Reliance Trends vs. Zudio) — run by Competitor Intel Agent. Customer sentiment and reverse logistics live at category level on Customer & CRM; the campaign deep-dive now has its own page.')
+    + renderCompetitorSection();
+  document.getElementById('marketIntelPage').innerHTML = html;
+}
+function brandKpiRowHTML(c){
+  const k=CAMPAIGN_BRAND_KPIS[c.id];
+  return `<tr onclick="openCampaignTop5(${c.id})"><td class="name link">${c.name} <span class="biz-tag">${c.biz}</span></td><td class="good">+${k.awarenessLift}%</td><td>${k.adRecall}%</td><td>${k.shareOfVoice}%</td><td>${k.sentimentScore}/100</td></tr>`;
+}
+function renderBrandKpiTable(){
+  const rows=CAMPAIGNS_TOP5.filter(c=>bizVisible(c.biz));
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Brand campaign KPIs</div><div class="panel-sub">Awareness, recall, share of voice and sentiment — the brand-health side of the same 9 campaigns · click a row for the full read</div></div></div><table class="table"><thead><tr><th>Campaign</th><th>Awareness lift</th><th>Ad recall</th><th>Share of voice</th><th>Sentiment score</th></tr></thead><tbody>${rows.map(brandKpiRowHTML).join('')}</tbody></table></div>`;
+}
+function creativeMixRowHTML(c,m){
+  return `<tr><td class="name">${c.name} <span class="biz-tag">${c.biz}</span></td><td>${m.format}</td><td>${m.shareOfSpend}%</td><td>${m.ctr}%</td><td>${m.completion!=null?m.completion+'%':'—'}</td></tr>`;
+}
+function renderCreativeMixTable(){
+  const rows=CAMPAIGNS_TOP5.filter(c=>bizVisible(c.biz));
+  const body=rows.map(c=>CAMPAIGN_CREATIVE_MIX[c.id].map(m=>creativeMixRowHTML(c,m)).join('')).join('');
+  return `<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Creative-level analysis</div><div class="panel-sub">Impact by creative format within each campaign — video vs. static/carousel vs. UGC/influencer</div></div></div><table class="table"><thead><tr><th>Campaign</th><th>Format</th><th>Share of spend</th><th>CTR</th><th>Completion rate</th></tr></thead><tbody>${body}</tbody></table></div>`;
+}
+function buildCampaignDeepDivePage(){
+  const el=document.getElementById('campaignsPage');
+  if(!el) return;
+  if(!isOnboarded(currentBusiness)){ el.innerHTML=sectionHead('Campaign Deep-Dive',currentBusiness+' is newly onboarded onto Growth OS')+notOnboardedNote('Campaign-level detail'); return; }
+  const html = sectionHead('Campaign Deep-Dive','Full detail behind the 9 campaigns surfaced on the CMO Command Center — spend, reach, brand impact and creative-format performance, run by Campaign Agent')
+    + renderCampaignDeepDiveTable()
+    + sectionHead('Brand campaign KPIs','Where each campaign is landing on awareness, recall, share of voice and sentiment')
+    + renderBrandKpiTable()
+    + sectionHead('Creative-level analysis','Which format is actually driving the impact inside each campaign')
+    + renderCreativeMixTable();
+  el.innerHTML = html;
+}
+/* ---------- Creative & Content: asset-level data (business-aware) ---------- */
+const CREATIVE_ASSETS=[
+  {asset:'AJIO_Festive_Prospecting_V2',biz:'AJIO',format:'Video',platform:'YouTube',spend:165,ctr:1.1,roas:2.0,freq:9.2,status:'FATIGUED'},
+  {asset:'AJIO_PMax_Catalog_Static',biz:'AJIO',format:'Static (Feed)',platform:'Google PMax',spend:540,ctr:3.4,roas:5.1,freq:2.1,status:'WINNING'},
+  {asset:'AJIO_SearchBrand_RSA',biz:'AJIO',format:'Responsive Search Ad',platform:'Google Search',spend:210,ctr:6.8,roas:8.6,freq:1.4,status:'WINNING'},
+  {asset:'Tira_Fenty_Retarget_Carousel',biz:'Tira',format:'Carousel',platform:'Meta DPA',spend:340,ctr:2.9,roas:5.8,freq:4.6,status:'WINNING'},
+  {asset:'Tira_Skincare_Prospecting_UGC',biz:'Tira',format:'UGC Video',platform:'Meta',spend:260,ctr:1.3,roas:2.1,freq:8.4,status:'FATIGUED'},
+  {asset:'Tira_Nonbrand_Search_Static',biz:'Tira',format:'Static',platform:'Google Search',spend:460,ctr:2.2,roas:2.6,freq:2.8,status:'WATCH'},
+  {asset:'JioMart_DiwaliDhamaka_Static',biz:'Jiomart',format:'Static (Feed)',platform:'Google PMax',spend:180,ctr:3.1,roas:5.4,freq:2.4,status:'WINNING'},
+  {asset:'JioMart_RozKaSaman_UGC',biz:'Jiomart',format:'UGC Video',platform:'Meta',spend:120,ctr:1.6,roas:3.0,freq:6.1,status:'WATCH'},
+  {asset:'Trends_DiwaliWardrobe_Carousel',biz:'Reliance Trends',format:'Carousel',platform:'Meta',spend:95,ctr:2.2,roas:4.1,freq:3.8,status:'WINNING'},
+  {asset:'Trends_FashionUtsav_Video',biz:'Reliance Trends',format:'Video',platform:'YouTube',spend:140,ctr:1.2,roas:2.3,freq:7.6,status:'FATIGUED'}
+];
+const CREATIVE_CADENCE=[
+  {agency:'Ogilvy',newAssets:14,turnaroundDays:6,liveAssets:22},
+  {agency:'Qyuki Digital Media',newAssets:9,turnaroundDays:9,liveAssets:15}
+];
+const FATIGUE_TREND={weeks:['W1','W2','W3','W4','W5','W6','W7','W8'],freq:[4.2,4.8,5.6,6.4,7.1,7.9,8.6,9.2],ctrIndex:[100,96,91,84,77,69,61,54]};
+function formatBucket(f){ return f.includes('Video')?'Video/UGC':f.includes('Static')?'Static/Feed':(f.includes('RSA')||f.includes('Search Ad'))?'Search RSA':f.includes('Carousel')?'Carousel':f; }
+function buildCreativePage(){
+  const biz=currentBusiness;
+  const visible=CREATIVE_ASSETS.filter(a=>bizVisible(a.biz));
+  const avgCtr=visible.length? visible.reduce((s,a)=>s+a.ctr,0)/visible.length : 0;
+  const avgRoas=visible.length? visible.reduce((s,a)=>s+a.roas,0)/visible.length : 0;
+  const fatigued=visible.filter(a=>a.status==='FATIGUED').length;
+  const best=visible.length? visible.reduce((a,b)=>a.roas>b.roas?a:b) : null;
+  const metricStrip=`<div class="metric-strip" style="margin-bottom:12px"><div class="metric-box"><div class="l">Creatives tracked</div><div class="v">${visible.length}</div><div class="m">${biz==='All businesses'?'Portfolio sample':biz+' sample'}</div></div><div class="metric-box"><div class="l">Avg CTR</div><div class="v">${avgCtr.toFixed(1)}%</div><div class="m">Across tracked assets</div></div><div class="metric-box"><div class="l">Fatigued assets</div><div class="v">${fatigued}</div><div class="m ${fatigued?'warn':'good'}">${fatigued?'Needs refresh':'None flagged'}</div></div><div class="metric-box"><div class="l">Avg ROI</div><div class="v">${avgRoas.toFixed(1)}x</div><div class="m">Blended across formats</div></div><div class="metric-box"><div class="l">Best format</div><div class="v">${best?best.format:'—'}</div><div class="m good">${best?best.roas+'x ROI':''}</div></div></div>`;
+  const assetRows=CREATIVE_ASSETS.map(a=>{
+    const dim=!bizVisible(a.biz)?' dimmed':'';
+    const statusClass=a.status==='WINNING'?'good':a.status==='WATCH'?'warn':'bad';
+    return `<tr class="${dim}"><td class="name">${a.asset} <span class="biz-tag">${a.biz}</span></td><td>${a.format}</td><td>${a.platform}</td><td>${lakh(a.spend)}</td><td>${a.ctr}%</td><td>${a.roas}x</td><td>${a.freq}/wk</td><td><span class="mini-status ${statusClass}">${a.status}</span></td></tr>`;
+  }).join('');
+  const assetTable=`<div class="panel table-panel"><div class="panel-head"><div><div class="panel-title">Asset-level performance</div><div class="panel-sub">Top and bottom creatives across the portfolio, by CTR/ROI and delivery frequency</div></div></div><table class="table"><thead><tr><th>Asset</th><th>Format</th><th>Platform</th><th>Spend</th><th>CTR</th><th>ROI</th><th>Frequency</th><th>Status</th></tr></thead><tbody>${assetRows}</tbody></table></div>`;
+  const cadenceRows=CREATIVE_CADENCE.map(c=>`<div class="signal"><span class="dot ${c.turnaroundDays<=7?'green':''}"></span><div><div class="t">${c.agency}</div><div class="s">${c.newAssets} new assets this month · ${c.liveAssets} live</div></div><div class="right">${c.turnaroundDays}d<br><span class="${c.turnaroundDays<=7?'good':'warn'}">turnaround</span></div></div>`).join('');
+  const cadencePanel=`<div class="panel"><div class="panel-title">Agency output cadence</div><div class="panel-sub">New assets shipped and average turnaround</div><div class="signal-list" style="margin-top:12px">${cadenceRows}</div></div>`;
+  const fatiguePanel=`<div class="panel"><div class="panel-title">Creative fatigue</div><div class="panel-sub">Flagged by frequency + CTR decay</div><div class="signal-list" style="margin-top:12px">${CREATIVE_ASSETS.filter(a=>a.status!=='WINNING').map(a=>`<div class="signal${!bizVisible(a.biz)?' dimmed':''}"><span class="dot ${a.status==='FATIGUED'?'red':'yellow'}"></span><div><div class="t">${a.asset}</div><div class="s">Frequency ${a.freq}/wk · ${a.status==='FATIGUED'?'hook fatigue':'watch for decay'}</div></div><div class="right ${a.status==='FATIGUED'?'bad':'warn'}">${a.status}</div></div>`).join('')}${best?`<div class="signal${!bizVisible(best.biz)?' dimmed':''}"><span class="dot green"></span><div><div class="t">${best.asset}</div><div class="s">CTR ${best.ctr}% · best performer this period</div></div><div class="right good">WIN</div></div>`:''}</div></div>`;
+  document.getElementById('creativePage').innerHTML=
+    sectionHead('Creative & Content','Creative efficiency, fatigue signals, content performance and agency contribution'+(biz!=='All businesses'?' · '+biz:''))
+    +metricStrip
+    +`<div class="grid-3">${fatiguePanel}<div class="panel"><div class="panel-title">Format performance</div><div class="panel-sub">ROI by creative format</div><div class="chart-h"><canvas id="creativeChart"></canvas></div></div>${cadencePanel}</div>`
+    +`<div class="detail-grid" style="margin-top:12px">${assetTable}<div class="panel"><div class="panel-title">Fatigue trend</div><div class="panel-sub">Delivery frequency vs CTR decay index (8 weeks, portfolio)</div><div class="chart-h"><canvas id="fatigueTrendChart"></canvas></div></div></div>`
+    +sectionHead('Agency performance','Creative / content partners')
+    +`<div class="panel"><div class="signal-list"><div class="signal"><span class="dot green"></span><div><div class="t">Ogilvy</div><div class="s">High-volume output · improving CTR</div></div><div class="right good">+9%</div></div><div class="signal"><span class="dot"></span><div><div class="t">Qyuki Digital Media</div><div class="s">Lower revenue per ₹ than peers</div></div><div class="right warn">-6%</div></div></div></div>`
+    +sectionHead('Creative actions','The CMO can push interventions into the creative agent without leaving the cockpit')
+    +renderInlineActions(['Refresh fatigued Tira and AJIO prospecting creatives','Scale winning AJIO search hooks and Tira retargeting carousel','Re-cut top 5 assets for short-form video']);
+  renderCreativeCharts();
+  renderFatigueTrendChart();
+}
+function renderCreativeCharts(){ try {
+  const c=document.getElementById('creativeChart');if(!c)return;
+  const visible=CREATIVE_ASSETS.filter(a=>bizVisible(a.biz));
+  const buckets={};
+  visible.forEach(a=>{ const b=formatBucket(a.format); (buckets[b]=buckets[b]||[]).push(a.roas); });
+  const labels=Object.keys(buckets);
+  const data=labels.map(l=>round(buckets[l].reduce((s,v)=>s+v,0)/buckets[l].length,1));
+  if(charts.creative)charts.creative.destroy();
+  charts.creative=new Chart(c,{type:'bar',data:{labels,datasets:[{label:'ROI',data,backgroundColor:['#5f78ff','#6fb4ff','#9176d6','#dfb14a','#52d98d'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#67738b',font:{size:9}}},y:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}}}}});
+} catch(e){ console.error('renderCreativeCharts failed:', e); } }
+function renderFatigueTrendChart(){ try {
+  const c=document.getElementById('fatigueTrendChart');if(!c)return;
+  if(charts.fatigueTrend)charts.fatigueTrend.destroy();
+  charts.fatigueTrend=new Chart(c,{data:{labels:FATIGUE_TREND.weeks,datasets:[
+    {type:'line',label:'CTR index',data:FATIGUE_TREND.ctrIndex,borderColor:'#ff8a94',backgroundColor:'rgba(255,138,148,.08)',yAxisID:'y1',tension:.35,fill:true,pointRadius:2},
+    {type:'bar',label:'Frequency / wk',data:FATIGUE_TREND.freq,backgroundColor:'rgba(98,119,255,.55)',borderRadius:4,yAxisID:'y'}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8b98b0',font:{size:9},boxWidth:10}}},scales:{x:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}},y:{grid:{color:'#162036'},ticks:{color:'#67738b',font:{size:9}}},y1:{position:'right',grid:{display:false},ticks:{color:'#67738b',font:{size:9}}}}}});
+} catch(e){ console.error('renderFatigueTrendChart failed:', e); } }
+function openChannel(name){const c=DATA.byBusiness[currentBusiness].channels.find(x=>x.name===name);if(!c)return;openModal(name+(currentBusiness!=='All businesses'?' · '+currentBusiness:''),`<div class="modal-grid">${[['Spend',money(c.spend)],['Revenue',money(c.rev)],['ROI',c.roi+'x'],['CAC',c.cac?'₹'+c.cac:'—'],['MoM',c.delta+'%'],['Status',c.status.toUpperCase()]].map(x=>`<div class="modal-box"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div><div class="modal-section"><div class="panel-title">CMO interpretation</div><div class="modal-copy">The channel view should connect spend to the resulting revenue pool, explain the movement, and expose the underlying campaign, vendor, creative and audience drivers. In production, this panel would be backed by actual measurement lineage.</div></div>`)}
+/* ---------- campaign-level insights (business-aware) ---------- */
+function deltaHTML(d){ return `<span class="${d>=0?'good':'bad'}">${d>=0?'▲':'▼'} ${Math.abs(d)}%</span>`; }
+function campaignRowHTML(p,c,hasToggle){
+  const expanded=expandedCampaigns.has(p.key+'|'+c.name);
+  const chevron=hasToggle?`<span class="camp-chevron">${expanded?'▾':'▸'}</span>`:`<span class="camp-chevron"></span>`;
+  const dim=!bizVisible(c.biz)?' dimmed':'';
+  const rowCls=(hasToggle?'camp-row-toggle':'')+dim;
+  const onclick=hasToggle?` onclick="toggleCampaignRow('${p.key}','${c.name.replace(/'/g,"\\'")}')"`:'';
+  let html=`<tr class="${rowCls}"${onclick}><td class="name">${chevron}${c.name} <span class="biz-tag">${c.biz}</span></td><td>${lakh(c.spend)}</td><td>₹${c.cpa}</td><td>${c.roas}x</td><td>${deltaHTML(c.delta)}</td><td><span class="mini-status ${c.status==='ACTIVE'?'good':'warn'}">${c.status}</span></td></tr>`;
+  if(hasToggle && expanded){
+    html+=c.adGroups.map(a=>`<tr class="adgroup-row${dim}"><td class="name">${a.name}</td><td>${lakh(a.spend)}</td><td>₹${a.cpa}</td><td>${a.roas}x</td><td>${deltaHTML(a.delta)}</td><td></td></tr>`).join('');
+  }
+  return html;
+}
+function insightCardHTML(ins,idx){
+  const camp=findCampaign(ins.platform,ins.campaign);
+  if(!camp) return '';
+  const dim=!bizVisible(ins.biz)?' dimmed':'';
+  return `<div class="ins-card${dim}" onclick="openCampaignInsight(${ins.id})">
+    <div class="ins-top"><span class="ins-num">N°${idx+1}</span><span class="ins-badge ${ins.sev}">${ins.sev}</span><span class="biz-tag">${ins.biz}</span><span class="ins-time">${ins.time}</span></div>
+    <div class="ins-title">${ins.title(camp)}</div>
+    <div class="ins-detail">${ins.detail(camp)}</div>
+    <div class="ins-agent">▹ ${ins.agent}</div>
+  </div>`;
+}
+/* ---------- top-level spend bucket mix (business-aware) ----------
+   Marketing/working-media = total spend minus the real agency and
+   tool/platform vendor lines already in DATA.vendors — so the three
+   buckets always sum EXACTLY to BU_TOTALS[biz].spend, no separate
+   rescaling needed. ---------------------------------------------- */
+function spendBuckets(biz){
+  const vendors=DATA.byBusiness[biz].vendors;
+  const agency=round(vendors.filter(v=>v.category==='agency').reduce((s,v)=>s+v.spend,0),1);
+  const tool=round(vendors.filter(v=>v.category==='tool').reduce((s,v)=>s+v.spend,0),1);
+  const total=BU_TOTALS[biz].spend;
+  const marketing=round(total-agency-tool,1);
+  const agencyRev=round(vendors.filter(v=>v.category==='agency').reduce((s,v)=>s+v.rev,0),0);
+  const toolRev=round(vendors.filter(v=>v.category==='tool').reduce((s,v)=>s+v.rev,0),0);
+  const totalRev=BU_TOTALS[biz].rev;
+  const marketingRev=round(totalRev-agencyRev-toolRev,0);
+  return {marketing,agency,tool,total,marketingRev,agencyRev,toolRev,totalRev};
+}
+function spendBucketHTML(biz,chartId){
+  const b=spendBuckets(biz);
+  const pct=n=>Math.round(n/b.total*100);
+  const roiOf=(rev,spend)=>spend?round(rev/spend,1):0;
+  const vendors=DATA.byBusiness[biz].vendors;
+  const topAgency=[...vendors].filter(v=>v.category==='agency').sort((a,c)=>c.spend-a.spend)[0];
+  const topTool=[...vendors].filter(v=>v.category==='tool').sort((a,c)=>c.spend-a.spend)[0];
+  const workingPct=pct(b.marketing);
+  const band=workingPct<75?' — below the healthy 75–85% working-media band, worth a non-working cost review':workingPct>85?' — comfortably above the typical 75–85% benchmark':' — inside the healthy 75–85% working-media band';
+  return `<div class="bucket-row">
+    <div class="bucket-chip"><span class="l">Media</span><span class="v">${money(b.marketing)}</span><span class="m">${workingPct}% of spend · ₹${b.marketingRev.toLocaleString('en-IN')} Cr revenue · ${roiOf(b.marketingRev,b.marketing)}x ROI</span></div>
+    <div class="bucket-chip"><span class="l">Agency/vendors</span><span class="v">${money(b.agency)}</span><span class="m">${pct(b.agency)}% of spend · ₹${b.agencyRev.toLocaleString('en-IN')} Cr revenue · ${roiOf(b.agencyRev,b.agency)}x ROI</span></div>
+    <div class="bucket-chip"><span class="l">Tools</span><span class="v">${money(b.tool)}</span><span class="m">${pct(b.tool)}% of spend · revenue impact not directly attributable</span></div>
+  </div>
+  <div style="height:180px;margin-top:12px;position:relative"><canvas id="${chartId}"></canvas></div>
+  <div class="camp-note">Working-media share is ${workingPct}% of ${biz==='All businesses'?'portfolio':biz} spend${band}. ${topAgency?topAgency.name+' is the largest agency line at '+money(topAgency.spend)+'.':''} ${topTool?topTool.name+' is the largest tool/platform line at '+money(topTool.spend)+'.':''}</div>`;
+}
+function spendBucketChart(chartId){ try {
+  const b=spendBuckets(currentBusiness);
+  const el=document.getElementById(chartId);
+  if(!el) return;
+  if(charts[chartId])charts[chartId].destroy();
+  const data=[b.marketing,b.agency,b.tool];
+  const labels=['Media','Agency/vendors','Tools'];
+  const bucketColors=['#5b72ff','#5db6ff','#8d73d6'];
+  charts[chartId]=new Chart(el,{type:'pie',data:{
+    labels,
+    datasets:[{data,backgroundColor:bucketColors,borderColor:'#181a1e',borderWidth:2}]
+    },options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,position:'right',labels:{color:'#a6b0c3',font:{size:10},boxWidth:10}},
+      tooltip:{callbacks:{label:function(item){
+        const v=item.parsed; const pct=Math.round(v/b.total*100);
+        return item.label+': '+money(v)+' ('+pct+'% of spend)';
+      }}}}}});
+} catch(e){ console.error('spendBucketChart failed', e); } }
+function renderCampaignsTop5(){
+  const el=document.getElementById('campaignsTop5Row');
+  if(!el) return;
+  const items=CAMPAIGNS_TOP5.filter(c=>bizVisible(c.biz));
+  el.innerHTML = items.length ? items.map(c=>`<div class="top-camp-card" onclick="openCampaignTop5(${c.id})">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
+      <div style="font-weight:800;font-size:12px;color:#eef1f7;line-height:1.35">${c.name}</div>
+      <span class="biz-tag">${c.biz}</span>
+    </div>
+    <div style="font-size:9px;color:#73809a;margin-top:4px">${c.type} \u00b7 ${c.launched}</div>
+    <div class="top-camp-metrics">
+      <div class="tcm"><div class="l">Spend</div><div class="v">${money(c.spend)}</div></div>
+      <div class="tcm"><div class="l">Revenue</div><div class="v">${money(c.rev)}</div></div>
+      <div class="tcm"><div class="l">Views</div><div class="v">${c.views}</div></div>
+      <div class="tcm"><div class="l">${c.footfall!=null?'Footfall':'Acquisition lift'}</div><div class="v ${(c.footfall!=null?c.footfall:c.acquisition)>=0?'good':'bad'}">${(c.footfall!=null?c.footfall:c.acquisition)>=0?'+':''}${c.footfall!=null?c.footfall:c.acquisition}%</div></div>
+      <div class="tcm"><div class="l">${c.installs!=null?'Installs (MoM)':'App installs'}</div><div class="v ${c.installs!=null?(c.installs>=0?'good':'bad'):''}">${c.installs!=null?(c.installs>=0?'+':'')+c.installs+'%':'N/A · no app'}</div></div>
+    </div>
+  </div>`).join('') : '<div class="dq-empty">No top campaigns for this business in the current window.</div>';
+}
+function openCampaignTop5(id){
+  const c=CAMPAIGNS_TOP5.find(x=>x.id===id);
+  if(!c) return;
+  openModal(c.name,`
+    <div class="modal-grid"><div class="modal-box"><span>Business</span><b>${c.biz}</b></div><div class="modal-box"><span>Spend</span><b>${money(c.spend)}</b></div><div class="modal-box"><span>Views</span><b>${c.views}</b></div><div class="modal-box"><span>ROI</span><b>${c.roi}x</b></div></div>
+    <div class="modal-grid"><div class="modal-box"><span>Footfall lift (MoM)</span><b>${c.footfall!=null?'+'+c.footfall+'%':'N/A · online-only'}</b></div><div class="modal-box"><span>App installs (MoM)</span><b>${c.installs!=null?'+'+c.installs+'%':'N/A · no app'}</b></div><div class="modal-box"><span>Acquisition (MoM)</span><b>+${c.acquisition}%</b></div><div class="modal-box"><span>Launched</span><b>${c.launched}</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${c.note}</div></div>
+    <div class="modal-section"><div class="panel-title">Campaign team</div><div class="modal-copy">${c.type} \u00b7 Agency: ${c.agency} \u00b7 Talent: ${c.talent}</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">Ranked in the top campaigns by combined reach and business impact (footfall + install + acquisition lift) across the trailing 60 days.</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="setPage('campaigns')">Open Campaign Deep-Dive →</button><button class="btn" onclick="toast('Scale-up brief queued for ${c.name.replace(/'/g,"\\'")}')">Queue scale-up brief</button><button class="btn" onclick="closeModal()">Close</button></div>
+    ${notifyRowHTML(c.name,'Head of Brand')}
+  `);
+}
+
+
+function renderSpendBucket(){
+  const el=document.getElementById('spendBucketSection');
+  if(!el) return;
+  if(!isOnboarded(currentBusiness)){ el.innerHTML=notOnboardedNote('Spend bucket mix'); return; }
+  el.innerHTML=spendBucketHTML(currentBusiness,'spendBucketChart');
+}
+/* ---------- media mix recommendation (business-aware) ---------- */
+const RECOMMENDED_SHARE={'Performance Marketing':.40,'Brand Marketing':.18,'SEO / GEO':.12,'Creative & Content':.10,'Database / CRM':.14,'Influencer / Affiliate':.06};
+const MIX_RATIONALE={
+  'Performance Marketing':'Highest absolute revenue contributor — hold and grow modestly while CPA stays efficient.',
+  'Brand Marketing':'No direct CAC linkage — trim share and protect only campaigns with a proven halo effect.',
+  'SEO / GEO':'Cheapest acquisition channel in the portfolio and still compounding — nearly double its share.',
+  'Creative & Content':'Fatigue-prone and below-median ROI right now — hold back until refreshed assets prove out.',
+  'Database / CRM':'Lowest CAC and a strong repeat-revenue multiple — the single biggest scale opportunity.',
+  'Influencer / Affiliate':'Below the portfolio ROI median — cut to the best-performing creator cohort only.'
+};
+function mediaMixHTML(biz){
+  const channels=DATA.byBusiness[biz].channels;
+  const total=channels.reduce((s,c)=>s+c.spend,0)||1;
+  let curBlend=0, recBlend=0;
+  const rows=channels.map(c=>{
+    const curShare=c.spend/total, recShare=RECOMMENDED_SHARE[c.name]??curShare;
+    const deltaCr=round(recShare*total-c.spend,1);
+    curBlend+=curShare*c.roi; recBlend+=recShare*c.roi;
+    return {name:c.name,curShare,recShare,deltaCr,roi:c.roi};
+  });
+  const lift=((recBlend-curBlend)/curBlend*100);
+  const tableRows=rows.map(r=>`<tr><td class="name">${r.name}</td><td>${(r.curShare*100).toFixed(0)}%</td><td>${(r.recShare*100).toFixed(0)}%</td><td><span class="${r.deltaCr>=0?'good':'bad'}">${r.deltaCr>=0?'▲ +':'▼ '}${money(Math.abs(r.deltaCr))}</span></td><td>${r.roi}x</td><td>${MIX_RATIONALE[r.name]||''}</td></tr>`).join('');
+  return `<div class="panel table-panel"><table class="table"><thead><tr><th>Channel</th><th>Current mix</th><th>Recommended mix</th><th>Δ Spend</th><th>ROI</th><th>Why</th></tr></thead><tbody>${tableRows}</tbody></table></div>`;
+}
+function mediaMixNoteHTML(biz){
+  const channels=DATA.byBusiness[biz].channels;
+  const total=channels.reduce((s,c)=>s+c.spend,0)||1;
+  let curBlend=0, recBlend=0;
+  channels.forEach(c=>{ const curShare=c.spend/total, recShare=RECOMMENDED_SHARE[c.name]??curShare; curBlend+=curShare*c.roi; recBlend+=recShare*c.roi; });
+  const lift=((recBlend-curBlend)/curBlend*100);
+  const bizSuffix=biz!=='All businesses'?' — '+biz:'';
+  return `<div class="panel"><div class="rail-section-title" style="margin-top:0">Media mix recommendation</div><div class="money-note" style="flex-direction:column;align-items:stretch;gap:8px"><span><strong>Modeled outcome:</strong> Reallocating within the same ${money(total)} channel budget${biz!=='All businesses'?' for '+biz:''} is estimated to lift blended ROI from ${curBlend.toFixed(1)}x to ${recBlend.toFixed(1)}x (${lift>=0?'+':''}${lift.toFixed(0)}%) — no net new spend required.</span><button class="btn primary" onclick="queueAction('Approve media mix rebalance${bizSuffix}')">Queue rebalance</button></div></div>`;
+}
+function campaignPlatformsHTML(biz){
+  const cards=CAMPAIGN_PLATFORMS.map(p=>{
+    const visible=p.campaigns.filter(c=>bizVisible(c.biz));
+    const visSpend=visible.reduce((s,c)=>s+c.spend,0);
+    const subtitle=biz==='All businesses'?`${p.campaigns.length} campaigns`:`${visible.length} of ${p.campaigns.length} campaigns · ${biz}`;
+    return `<div class="camp-card"><div class="camp-card-head"><span class="badge ${p.badgeClass}">${p.name.toUpperCase()}</span>${deltaHTML(p.delta)}</div><div class="v">${lakh(visSpend)}</div><div class="sub">Spend · 7D · ${subtitle}</div><div class="camp-metrics"><div class="mbox"><div class="l">Impr.</div><div class="v">${p.impr}</div></div><div class="mbox"><div class="l">CTR</div><div class="v">${p.ctr}%</div></div><div class="mbox"><div class="l">Avg CPA</div><div class="v">₹${p.cpa}</div></div><div class="mbox"><div class="l">ROI</div><div class="v">${p.roas}x</div></div></div></div>`;
+  }).join('');
+  const tables=CAMPAIGN_PLATFORMS.map(p=>`<div class="panel table-panel" style="margin-bottom:10px"><div class="panel-head"><div><div class="panel-title">${p.name}</div><div class="panel-sub">${p.campaigns.length} campaigns across AJIO + Tira · click a row with ▸ to expand ad groups</div></div></div><table class="table"><thead><tr><th>Campaign</th><th>Spend</th><th>CPA</th><th>ROI</th><th>Δ7D</th><th>Status</th></tr></thead><tbody>${p.campaigns.map(c=>campaignRowHTML(p,c,!!c.adGroups)).join('')}</tbody></table></div>`).join('');
+  const totalVisible=CAMPAIGN_PLATFORMS.reduce((s,p)=>s+p.campaigns.filter(c=>bizVisible(c.biz)).reduce((s2,c)=>s2+c.spend,0),0);
+  const perfSpend=DATA.byBusiness[biz].channels.find(c=>c.name==='Performance Marketing').spend;
+  return `<div class="camp-card-row">${cards}</div>${tables}<div class="camp-note">Google Ads + Meta Ads shown here total ${lakh(totalVisible)}${biz!=='All businesses'?' for '+biz:''} of the ₹${perfSpend} Cr Performance Marketing pool above — the remainder sits in affiliate, programmatic and marketplace ads not broken out in this prototype.</div>`;
+}
+function campaignAnomaliesSideHTML(){
+  return `<div class="panel"><div class="rail-section-title" style="margin-top:0">Campaign anomalies</div><div class="panel-sub" style="margin-bottom:8px">Detected by Anomaly Detector · click any card for the background</div><div class="ins-feed">${CAMPAIGN_INSIGHTS.map(insightCardHTML).join('')}</div></div>`;
+}
+function toggleCampaignRow(platformKey,name){
+  const k=platformKey+'|'+name;
+  if(expandedCampaigns.has(k)) expandedCampaigns.delete(k); else expandedCampaigns.add(k);
+  buildPage('spend');
+}
+function openCampaignInsight(id){
+  const ins=CAMPAIGN_INSIGHTS.find(x=>x.id===id);
+  if(!ins) return;
+  const camp=findCampaign(ins.platform,ins.campaign);
+  const platformName=CAMPAIGN_PLATFORMS.find(p=>p.key===ins.platform).name;
+  openModal(ins.title(camp),`
+    <div class="modal-grid"><div class="modal-box"><span>Platform</span><b>${platformName}</b></div><div class="modal-box"><span>Campaign</span><b>${ins.campaign}</b></div><div class="modal-box"><span>Raised by</span><b>${ins.agent}</b></div><div class="modal-box"><span>Detected</span><b>${ins.time}</b></div></div>
+    <div class="modal-section"><div class="panel-title">What's happening</div><div class="modal-copy">${ins.detail(camp)}</div></div>
+    <div class="modal-section"><div class="panel-title">Why the orchestrator surfaced this</div><div class="modal-copy">${ins.rationale(camp)}</div></div>
+    <div class="modal-section"><div class="panel-title">Suggested next step</div><div class="modal-copy">${ins.steps.map((s,i)=>(i+1)+'. '+s).join('<br>')}</div></div>
+    <div class="decision-actions" style="margin-top:14px"><button class="btn primary" onclick="queueAction('${ins.campaign.replace(/'/g,"\\'")} review')">Queue for review</button><button class="btn" onclick="closeModal()">Not now</button></div>
+    ${notifyRowHTML(ins.campaign,'Head of Channel')}
+  `);
+}
+function openInsights(){openModal('CMO Intelligence · 12 active insights',`<div class="signal-list">${[
+'Paid Social is above plan in Tira while efficiency is declining; budget and creative review is the immediate control point.',
+'Search is generating the strongest performance efficiency among scaled acquisition pools and has room for controlled expansion.',
+'CRM has a lower CAC than the paid media pools and is contributing a higher revenue multiple; test scale with frequency guardrails.',
+'Creative fatigue is emerging in 3 high-spend paid social campaigns; rotation can protect current spend before reallocating it.',
+'Brand spend is above run-rate in two categories; confirm whether the excess is supporting an approved seasonal objective.',
+'SEO/GEO visibility is increasing alongside organic revenue; monitor whether the lift persists across high-value categories.',
+'Influencer / affiliate is below the portfolio ROI median; review creators and partner economics before further scale.',
+'Agency/vendor concentration is visible in the spend ledger; benchmark cost-to-revenue performance across partners.',
+'Tira CAC is widening vs AJIO; customer cohort mix and repeat behavior should be checked before interpreting channel pressure alone.',
+'One portfolio-level view can link budget decisions to channel, agency, vendor, creative and CRM execution.',
+'Action history should track whether approved reallocations translated to realized revenue and efficiency.',
+'All prototype recommendations should be validated against actual attribution, MMM or finance methodology before execution.'
+].map((t,i)=>`<div class="signal"><span class="dot ${i===0||i===4?'':'green'}"></span><div><div class="t">${t}</div><div class="s">Insight ${i+1} · illustrative prototype data</div></div><div class="right">${i<3?'ACT':'INFO'}</div></div>`).join('')}</div>`)}
+function openAgentPanel(seed=''){openModal('Ask the Control Tower',`<div class="modal-copy" style="margin-top:0">Ask a business question and the orchestrator routes it to the relevant specialist agents. This prototype returns illustrative responses.</div><div style="margin-top:12px;display:flex;gap:8px"><input id="agentInput" value="${seed}" placeholder="e.g., Where should I cut ₹3 Cr without hurting revenue?" style="flex:1;background:#191b1e;color:#eef3ff;border:1px solid #2a3651;border-radius:7px;padding:10px;font-size:10px"/><button class="btn primary" onclick="runAgent()">Run</button></div><div id="agentResponse" style="margin-top:12px"></div>`)}
+function runAgent(){const q=document.getElementById('agentInput').value||'your question';document.getElementById('agentResponse').innerHTML=`<div class="modal-section"><div class="panel-title">Orchestrator response</div><div class="modal-copy"><b>Question:</b> ${q}<br><br><b>Route:</b> Spend Sentinel → ROI Analyst → Acquisition Agent<br><b>Readout:</b> Based on illustrative data scoped to ${currentBusiness}, the largest controllable efficiency pool is Paid Social / Influencer. The engine would compare current spend, revenue response, category objectives, vendor performance and budget guardrails before proposing a specific move.<br><br><b>Suggested next step:</b> open the Spend & ROI cockpit and review channel + agency economics, then queue a scenario for CMO approval.</div></div>`}
+function runHeroAsk(){const v=document.getElementById('heroAskInput').value.trim();if(!v){toast('Type a question first');return;}openAgentPanel(v);setTimeout(runAgent,60)}
+const PAGE_IDS={control:'controlPage',spend:'spendPage',growth:'growthPage',creative:'creativePage',customer:'customerPage',marketintel:'marketIntelPage',campaigns:'campaignsPage',actions:'actionsPage',history:'historyPage'};
+function setPage(page){currentPage=page;Object.keys(PAGE_IDS).forEach(p=>document.getElementById(PAGE_IDS[p]).style.display=p===page?'block':'none');document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));document.getElementById('pageCrumb').textContent={control:'CMO Command Center',spend:'Spend & ROI',growth:'Growth & Acquisition',creative:'Creative & Content',customer:'Customer & CRM',marketintel:'Competitor Intelligence',campaigns:'Campaign Deep-Dive',actions:'Action Review',history:'Action History'}[page];document.getElementById('filterCrumb').textContent=currentBusiness==='All businesses'?'Portfolio view':currentBusiness; buildPage(page); if(page==='growth')renderGrowthCharts(); if(page==='spend')spendBucketChart('spendBucketChartSpend');}
+function syncFilters(){currentBusiness=document.getElementById('businessFilter').value;document.getElementById('filterCrumb').textContent=currentBusiness==='All businesses'?'Portfolio view':currentBusiness;refreshControlPage();if(currentPage!=='control'){buildPage(currentPage); if(currentPage==='spend')spendBucketChart('spendBucketChartSpend'); if(currentPage==='growth')renderGrowthCharts();}toast(currentBusiness==='All businesses'?'Portfolio view':'Filtered to '+currentBusiness)}
+function resetView(){document.getElementById('businessFilter').value='All businesses';currentBusiness='All businesses';fullFeedOpen=false;document.getElementById('fullFeedSection').style.display='none';setPage('control');refreshControlPage();toast('Control Tower reset to portfolio view')}
+function resetFilters(){resetView()}
+
+buildByBusiness();
+refreshControlPage();
+['spend','growth','creative','customer','marketintel','campaigns','actions','history'].forEach(buildPage);
+</script>
 </body>
 </html>
